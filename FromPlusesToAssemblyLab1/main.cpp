@@ -2,13 +2,14 @@
 #include <cstdio>
 #include "ConstantTable/ConstantTable.h"
 #include "VariableTable/VariableTable.h"
+#include "Lexeme/Lexeme.h"
 
 using namespace std;
 
 int main()
 {
     ConstantTable<string> a;
-    a.read_file("reserved_words.txt");
+    a.read_file("txtFiles/reserved_words.txt");
     cout << "a.contains(\"int\") = " << a.contains("int") << endl;
     cout << "a.contains(\"double\") = " << a.contains("double") << endl;
 
@@ -16,11 +17,20 @@ int main()
     a.get_num("return", num);
     cout << "a.get_num(\"return\", num): num = " << num << endl;
 
+    a.get_num("main", num);
+    cout << "a.get_num(\"main\", num): num = " << num << endl;
+
+    a.get_num("void", num);
+    cout << "a.get_num(\"void\", num): num = " << num << endl;
+
+    a.get_num("for", num);
+    cout << "a.get_num(\"for\", num): num = " << num << endl;
+
     string str;
     a.get_val(num, str);
     cout << "a.get_val(num, str): str = " << str << endl;
 
-    table_var b;
+    VariableTable b;
     b.add("variable");
     b.add("vairable");
     b.add("vairalbe");

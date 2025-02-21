@@ -1,0 +1,9 @@
+int
+float
+main
+return
+void
+char
+double
+while
+for
