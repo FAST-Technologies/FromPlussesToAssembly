@@ -1,64 +1,65 @@
-#include <iostream>
-#include <cstdio>
-#include "ConstantTable/ConstantTable.h"
-#include "VariableTable/VariableTable.h"
-#include "Lexeme/Lexeme.h"
-
-using namespace std;
+#include "Constants.h"
 
 int main()
 {
-    ConstantTable<string> a;
-    a.read_file("txtFiles/reserved_words.txt");
-    cout << "a.contains(\"int\") = " << a.contains("int") << endl;
-    cout << "a.contains(\"double\") = " << a.contains("double") << endl;
+    try {
+        ConstantTable<string> constTable;
+        string str;
+        constTable.read_file(GlobalPaths::wordsPath);
+        cout << "a.contains(\"int\") = " << constTable.contains("int") << endl;
+        cout << "a.contains(\"double\") = " << constTable.contains("double") << endl;
 
-    int num;
-    a.get_num("return", num);
-    cout << "a.get_num(\"return\", num): num = " << num << endl;
+        int num;
+        constTable.get_num("return", num);
+        cout << "a.get_num(\"return\", num): num = " << num << endl;
 
-    a.get_num("main", num);
-    cout << "a.get_num(\"main\", num): num = " << num << endl;
+        constTable.get_num("main", num);
+        cout << "a.get_num(\"main\", num): num = " << num << endl;
 
-    a.get_num("void", num);
-    cout << "a.get_num(\"void\", num): num = " << num << endl;
+        constTable.get_num("void", num);
+        cout << "a.get_num(\"void\", num): num = " << num << endl;
 
-    a.get_num("for", num);
-    cout << "a.get_num(\"for\", num): num = " << num << endl;
+        constTable.get_num("for", num);
+        cout << "a.get_num(\"for\", num): num = " << num << endl;
 
-    string str;
-    a.get_val(num, str);
-    cout << "a.get_val(num, str): str = " << str << endl;
+        constTable.printTable();
 
-    VariableTable b;
-    b.add("variable");
-    b.add("vairable");
-    b.add("vairalbe");
-    b.add("variable");
-    int hash, chain;
-    b.get_location("variable", hash, chain);
-    cout << "b.get_location(\"variable\", hash, chain): hash = " << hash << "  chain = " << chain <<
-         endl;
+        constTable.get_val(num, str);
+        cout << "a.get_val(num, str): str = " << str << endl;
+    } catch (const exception& e) {
+        cerr << "Exception with reading and processing current file occurred: " << e.what() << endl;
+    }
 
-    b.set_type("variable", 2);
-    b.set_dimension("variable", 3);
-    b.set_is_init("variable", true);
-    b.set_is_init("variable", false, 1);
-    b.set_is_init("variable", true, 2);
-    lexeme c;
-    b.get_lexeme("variable", c);
+    try {
+        Lexeme lexeme;
+        VariableTable hashTable;
+        hashTable.add("variable");
+        hashTable.add("vairable");
+        hashTable.add("vairalbe");
+        hashTable.add("viriable");
+        int hash, chain;
+        hashTable.get_location("variable", hash, chain);
+        cout << "b.get_location(\"variable\", hash, chain): hash = " << hash << "  chain = " << chain <<
+             endl;
 
-    cout << "c.name = " << c.name << endl;
-    cout << "c.type = " << c.type << endl;
-    cout << "c.is_init[0] = " << c.is_init[0] << endl;
-    cout << "c.is_init[1] = " << c.is_init[1] << endl;
-    cout << "c.is_init[2] = " << c.is_init[2] << endl;
+        hashTable.set_type("variable", 2);
+        hashTable.set_dimension("variable", 3);
+        hashTable.set_is_init("variable", true);
+        hashTable.set_is_init("variable", false, 1);
+        hashTable.set_is_init("variable", true, 2);
+
+        hashTable.get_lexeme("variable", lexeme);
+
+        cout << "c.name = " << lexeme.name << endl;
+        cout << "c.type = " << lexeme.type << endl;
+        cout << "c.is_init[0] = " << lexeme.is_init[0] << endl;
+        cout << "c.is_init[1] = " << lexeme.is_init[1] << endl;
+        cout << "c.is_init[2] = " << lexeme.is_init[2] << endl;
+    } catch (const exception& e) {
+        cerr << "Error with processing Variable Table occurred: " << e.what() << endl;
+    }
+
+
 
     return 0;
 }
-
-
-//int main() {
-//    std::cout << "Hello, World!" << std::endl;
-//    return 0;
-//}

@@ -17,35 +17,9 @@ while
 for
 do
 switch
-:
-+
--
-*
-/
-?:
-&&
 if
 if else
 if else if else
 continue
 break
 goto
-=
-==
-<=
->=
-<
->
-+-
--=
-!=
-||
-&
-%=
-*=
->>
-<<
-^
-~
-|
-/=

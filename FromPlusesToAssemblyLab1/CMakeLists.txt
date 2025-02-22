@@ -6,4 +6,5 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(FromPlusesToAssemblyLab1 main.cpp
         VariableTable/VariableTable.cpp
         Lexeme/Lexeme.cpp
-        ConstantTable/ConstantTable.cpp)
+        ConstantTable/ConstantTable.cpp
+        Constants.h)

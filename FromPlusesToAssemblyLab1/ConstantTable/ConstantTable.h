@@ -1,6 +1,16 @@
 #ifndef FROMPLUSESTOASSEMBLYLAB1_CONSTANTTABLE_H
 #define FROMPLUSESTOASSEMBLYLAB1_CONSTANTTABLE_H
 
+/// <summary>
+/// [EN] Using directives of preprocessor
+/// [RU] Используемые директивы препроцессора
+/// </summary>
+#pragma once
+
+/// <summary>
+/// [EN] Libraries that we need to use
+/// [RU] Библиотеки, необходимые для использования
+/// </summary>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -8,6 +18,10 @@
 #include <stdexcept> // For exceptions
 #include <algorithm> // For std::advance
 
+/// <summary>
+/// [EN] Global namespaces
+/// [RU] Пространства глобальных имён
+/// </summary>
 using namespace std;
 
 // Класс постоянных таблиц
@@ -16,34 +30,33 @@ template <typename type> class ConstantTable
 private:
     set<type> table;
 public:
-    // Конструктор по умолчанию
+    /// <summary>
+    /// [EN] Constructor for ConstantTable class
+    /// [RU] Конструктор класса для класса ConstantTable
+    /// </summary>
     ConstantTable() = default;
-    // Деструктор
+
+    /// <summary>
+    /// [EN] Destructor for ConstantTable class
+    /// [RU] Деструктор класса для класса ConstantTable
+    /// </summary>
     ~ConstantTable()
     {
         table.clear();
+        cout << "Object ConstantTable is deleted" << endl;
     }
     // Добавление элемента в таблицу
-    inline void add(type elem)
+    inline void add(const type& elem)
     {
         table.insert(elem);
     }
     // Чтение таблицы из файла
     bool read_file(const string& name)
     {
-//        ifstream fs(name.c_str(), ios::in);
-//        if(!fs.is_open()) return false;
-//        type elem;
-//        while (!fs.eof())
-//        {
-//            fs >> elem;
-//            add(elem);
-//        }
-//        return true;
-        ifstream fs(name);  // Use string directly; modern C++
+        auto fs = ifstream(name);  // Use string directly; modern C++
         if (!fs.is_open()) {
             cerr << "Error opening file: " << name << endl;
-            return false; // Or throw an exception: throw std::runtime_error("...");
+            throw runtime_error("The error with opening file " + name + " occurred!");
         }
 
         type elem;
@@ -51,49 +64,62 @@ public:
             add(elem);
         }
 
-        if (fs.bad()) { // Check for read errors *after* the loop
+        if (fs.bad()) {
             cerr << "Error reading from file: " << name << endl;
-            return false; // or throw exception
+            throw runtime_error("The error with reading file " + name + " occurred!");
         }
         return true;
     }
     // Проверка есть ли элемент в таблице
-    bool contains(type elem)
-    {
-//        typename set<type>::iterator it = table.find(elem);
-//        if(it == table.end()) return false;
-//        return true;
+    bool contains(const type& elem) const {
         return table.find(elem) != table.end();
     }
-    // Поиск номера по значению
-    bool get_num(type elem, int &num)
+
+    // Получает номер элемента в таблице. Если элемента нет - выбрасывает
+    // исключение.
+    bool check(const type& elem) const
     {
-        if(!contains(elem)) return false;
-        num = distance(table.begin(), table.find(elem));
+        return table.count(elem) > 0;
+    }
+
+    // Поиск номера по значению
+    bool get_num(const type& elem, int &num) const {
+        if (!contains(elem) || !check(elem)) {
+            cerr << "There is no element of table with current number!" << endl;
+            throw out_of_range("There is no element of table with current number!");
+        }
+        num = static_cast<int>(distance(table.begin(), table.find(elem)));
         return true;
     }
+
     // Поиск значения по номеру
     bool get_val(int num, type &elem)
     {
-        if(num < 0 || num >= table.size()) return false;
-//        typename set<type>::iterator it = table.begin();
-//        for(int i = 0; i < num; i++)
-//            it++;
-//        elem = *it;
-//        return true;
+        if (num < 0 || static_cast<size_t>(num) >= table.size()) {
+            cerr << "Num is out of range!" << endl;
+            return false;
+        }
         auto it = table.begin();
-        std::advance(it, num); // More efficient than looping
-
+        std::advance(it, num);
         elem = *it;
         return true;
     }
+
+    // Function for output table of elements to console
+    void printTable () const
+    {
+        int num;
+        for (const auto& elem : *this) {
+            if (get_num(elem, num)) {
+                cout << "a.get_num(\"" << elem << "\", num): num = " << num << endl;
+            } else {
+                cerr << "Error: Could not get number for element: " << elem << endl;
+            }
+        }
+    }
+
+    auto begin() const { return table.begin(); }
+    auto end() const { return table.end(); }
 };
-
-
-
-//class ConstantTable {
-//
-//};
-
 
 #endif //FROMPLUSESTOASSEMBLYLAB1_CONSTANTTABLE_H

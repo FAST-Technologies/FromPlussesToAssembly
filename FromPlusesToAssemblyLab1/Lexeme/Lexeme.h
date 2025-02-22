@@ -1,33 +1,50 @@
 #ifndef FROMPLUSESTOASSEMBLYLAB1_LEXEME_H
 #define FROMPLUSESTOASSEMBLYLAB1_LEXEME_H
 
+/// <summary>
+/// [EN] Using directives of preprocessor
+/// [RU] Используемые директивы препроцессора
+/// </summary>
+#pragma once
+
+/// <summary>
+/// [EN] Libraries that we need to use
+/// [RU] Библиотеки, необходимые для использования
+/// </summary>
 #include <string>
 #include <vector>
+#include <utility> // For std::move
+#include <algorithm> //For std::fill
+#include <iostream>
 
+/// <summary>
+/// [EN] Global namespaces
+/// [RU] Пространства глобальных имён
+/// </summary>
 using namespace std;
 
 // Класс для хранения идентификаторов и констант
-class lexeme
+class Lexeme
 {
 public:
     // Имя идентификатора или значение константы
     string name;
     // Тип, 0 - не определен, 1 - int, 2 - float
     int type{0};
-    // Массив флагов "илициализировано ли" размерности dimension
+    // Массив флагов "инициализировано ли" размерности dimension
     vector<bool> is_init;
     // Размерность массива, для переменных и констант - 1.
     int dimension{1};
     // Конструктор по умолчанию
-    lexeme();
+    Lexeme();
     // Конструктор с заданием имени идентификатора или значения константы
-    explicit lexeme(string new_name);
+    explicit Lexeme(string new_name);
     // Деструктор
-    ~lexeme();
+    ~Lexeme();
     // Оператор присваивания
-    lexeme &operator = (const lexeme &other)
+    Lexeme &operator = (const Lexeme &other)
     {
-        if(this != &other)
+        if (this != &other)
         {
             name = other.name;
             type = other.type;
@@ -37,8 +54,19 @@ public:
         return *this;
     }
 
+    // Оператор < для использования в std::set и других контейнерах, требующих
+    // сравнения
+    bool operator < (const Lexeme& other) const{
+        return name < other.name;
+    }
+
+    // Оператор == (только имя, нужно ли сравнивать и другие поля?)
+    bool operator == (const Lexeme& other) const {
+        return name == other.name;
+    }
+
     // Copy Constructor (Important!)
-    lexeme(const lexeme& other) : name(other.name), type(other.type), dimension(other.dimension), is_init(other.is_init) {}
+    Lexeme(const Lexeme& other) : name(other.name), type(other.type), dimension(other.dimension), is_init(other.is_init) {}
 };
 
 

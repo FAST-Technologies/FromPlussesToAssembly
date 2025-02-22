@@ -1,10 +1,16 @@
 #ifndef FROMPLUSESTOASSEMBLYLAB1_VARIABLETABLE_H
 #define FROMPLUSESTOASSEMBLYLAB1_VARIABLETABLE_H
 
+/// <summary>
+/// [EN] Using directives of preprocessor
+/// [RU] Используемые директивы препроцессора
+/// </summary>
+#pragma once
 
-//class VariableTable {
-//
-//};
+/// <summary>
+/// [EN] Libraries that we need to use
+/// [RU] Библиотеки, необходимые для использования
+/// </summary>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -13,11 +19,15 @@
 #include <memory> // For std::unique_ptr
 #include "../Lexeme/Lexeme.h"
 
+/// <summary>
+/// [EN] Global namespaces
+/// [RU] Пространства глобальных имён
+/// </summary>
 using namespace std;
 
-// Размер хэш-таблицы по умолчанию
-//#define default_hashnum 100
+/// Размер хэш-таблицы по умолчанию (константное значение)
 static const int default_hashnum = 100;
+
 // Класс переменных таблиц
 class VariableTable
 {
@@ -25,7 +35,7 @@ private:
     // Размер таблицы
     int hashnum;
     // Указатель на массив цепочек
-    vector<lexeme> *table;
+    vector<Lexeme> *table;
     // Подсчет хэша
     [[nodiscard]] int get_hash(const string& name) const;
     // Подсчет номера в цепочке
@@ -41,7 +51,7 @@ public:
     bool get_location(const string& name, int &hash, int &chain);
     // Проверка есть ли элемент в таблице
     //inline bool contains(const string& name);
-    [[nodiscard]] bool contains(const std::string& name) const;
+    [[nodiscard]] bool contains(const string& name) const;
     // Добавление нового имени идентификатора или значения константы
     bool add(const string& name);
     // Задание типа по хэшу и номеру в цепочке
@@ -61,12 +71,9 @@ public:
     // Задание флага инициализации для массивов по имени идентификатора или значению константы
     bool set_is_init(const string& name, bool is_init, int init_index);
     // Получение структуры lexeme по хэшу и номеру в цепочке
-    bool get_lexeme(int hash, int chain, lexeme &lexeme);
+    bool get_lexeme(int hash, int chain, Lexeme &lexeme) const;
     // Получение структуры lexeme по имени идентификатора или значению константы
-    bool get_lexeme(const string& name, lexeme &lexeme);
+    bool get_lexeme(const string& name, Lexeme &lexeme) const;
 };
-
-
-
 
 #endif //FROMPLUSESTOASSEMBLYLAB1_VARIABLETABLE_H
