@@ -8,7 +8,14 @@ void SetColor(int textColor, int bgColor) {
 
 int main()
 {
-    setlocale(0, "");
+    setlocale(LC_ALL, "");
+    cout.flags(ios::fixed);
+    cout.setf(ios_base::fixed);
+
+    // Использование лямбда - функции
+    auto hello { [](){ cout << "Welcome to first Assembly lab!" << endl; } };
+    hello();
+
     try {
         ConstantTable<string> constTable;
         ConstantTable<string> reservedWordsNew;
@@ -43,6 +50,7 @@ int main()
         cout << "a.get_val(num, str): str = " << str << endl;
     } catch (const exception& e) {
         cerr << "Exception with reading and processing current file occurred: " << e.what() << endl;
+        throw e;
     }
 
     try {
@@ -74,9 +82,8 @@ int main()
         cout << "c.is_init[2] = " << lexeme.is_init[2] << endl;
     } catch (const exception& e) {
         cerr << "Error with processing Variable Table occurred: " << e.what() << endl;
+        throw e;
     }
-
-
 
     return 0;
 }

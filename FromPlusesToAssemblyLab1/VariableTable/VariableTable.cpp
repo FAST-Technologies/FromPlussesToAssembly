@@ -209,5 +209,9 @@ bool VariableTable::get_lexeme(const string& name, Lexeme &lexeme) const
     return get_lexeme(hash, chain, lexeme);
 }
 
+int VariableTable::getLexemeCode(int& code_num) const {
+    return code_num;
+}
+
 
 

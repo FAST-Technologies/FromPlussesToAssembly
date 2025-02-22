@@ -95,6 +95,8 @@ public:
     bool get_lexeme(int hash, int chain, Lexeme &lexeme) const;
     // Получение структуры lexeme по имени идентификатора или значению константы
     bool get_lexeme(const string& name, Lexeme &lexeme) const;
+
+    int getLexemeCode(int& code_num) const;
 };
 
 #endif //FROMPLUSESTOASSEMBLYLAB1_VARIABLETABLE_H
