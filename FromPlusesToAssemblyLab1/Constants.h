@@ -8,6 +8,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <fstream>
+#include <windows.h>
 #include "ConstantTable/ConstantTable.h"
 #include "VariableTable/VariableTable.h"
 #include "Lexeme/Lexeme.h"

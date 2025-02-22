@@ -27,7 +27,7 @@ VariableTable::VariableTable(int new_hashnum) : hashnum(new_hashnum), table(new 
 
 VariableTable::~VariableTable() {
     table->clear();
-    cout << "Object VariableTable is deleted" << endl;
+    cout << "Object VariableTable is deleted!" << endl;
 }
 
 // Подсчет хэша

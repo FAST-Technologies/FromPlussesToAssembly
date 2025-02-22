@@ -16,6 +16,7 @@
 #include <utility> // For std::move
 #include <algorithm> //For std::fill
 #include <iostream>
+#include <random>
 
 /// <summary>
 /// [EN] Global namespaces

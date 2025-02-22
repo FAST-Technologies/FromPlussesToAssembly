@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <random>
 #include <memory> // For std::unique_ptr
 #include "../Lexeme/Lexeme.h"
 
@@ -27,6 +28,22 @@ using namespace std;
 
 /// Размер хэш-таблицы по умолчанию (константное значение)
 static const int default_hashnum = 100;
+
+enum class LexemeType {
+    Undefined,
+    Int,
+    Float,
+    Double,
+    String,
+    Char,
+    Bool,
+    Short
+};
+
+struct LexemeAttributes {
+    LexemeType type = LexemeType::Undefined;
+    bool initialized = false;
+};
 
 // Класс переменных таблиц
 class VariableTable
@@ -54,6 +71,10 @@ public:
     [[nodiscard]] bool contains(const string& name) const;
     // Добавление нового имени идентификатора или значения константы
     bool add(const string& name);
+
+    // bool addAttribute(const string& name, LexemeAttributes attributes);
+
+    // bool getAttribute(const string& name, LexemeAttributes& attributes) const;
     // Задание типа по хэшу и номеру в цепочке
     bool set_type(int hash, int chain, int type);
     // Задание типа по имени идентификатора или значению константы

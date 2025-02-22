@@ -7,6 +7,11 @@ signed char
 unsigned char
 short
 struct
+enum
+union
+class
+typedef
+using
 long
 main
 return
@@ -17,6 +22,15 @@ while
 for
 do
 switch
+wchar_t
+size_t
+char8_t
+char16_t
+char32_t
+uint8_t
+uint16_t
+uint32_t
+uint64_t
 if
 if else
 if else if else

@@ -1,11 +1,26 @@
 #include "Constants.h"
 
+// Функция установки цвета в консоли
+void SetColor(int textColor, int bgColor) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, (bgColor << 4) | textColor);
+}
+
 int main()
 {
+    setlocale(0, "");
     try {
         ConstantTable<string> constTable;
+        ConstantTable<string> reservedWordsNew;
+        ConstantTable<string> identifiersNew;
+        ConstantTable<string> separatorsNew;
+        ConstantTable<int> constantsNew;
         string str;
         constTable.read_file(GlobalPaths::wordsPath);
+        reservedWordsNew.read_file(GlobalPaths::wordPathNew);
+        identifiersNew.read_file(GlobalPaths::identPathNew);
+        separatorsNew.read_file(GlobalPaths::divisorPathNew);
+        constantsNew.read_file(GlobalPaths::constantsPathNew);
         cout << "a.contains(\"int\") = " << constTable.contains("int") << endl;
         cout << "a.contains(\"double\") = " << constTable.contains("double") << endl;
 
@@ -33,6 +48,8 @@ int main()
     try {
         Lexeme lexeme;
         VariableTable hashTable;
+        VariableTable identifiersNew;
+        VariableTable constantsNew;
         hashTable.add("variable");
         hashTable.add("vairable");
         hashTable.add("vairalbe");

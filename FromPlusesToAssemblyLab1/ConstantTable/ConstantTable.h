@@ -15,6 +15,7 @@
 #include <iostream>
 #include <string>
 #include <set>
+#include <random>
 #include <stdexcept> // For exceptions
 #include <algorithm> // For std::advance
 
@@ -24,7 +25,10 @@
 /// </summary>
 using namespace std;
 
-// Класс постоянных таблиц
+/// <summary>
+/// [EN] Class constant table
+/// [RU] Класс постоянных таблиц ConstantTable
+/// </summary>
 template <typename type> class ConstantTable
 {
 private:
@@ -46,9 +50,11 @@ public:
         cout << "Object ConstantTable is deleted" << endl;
     }
     // Добавление элемента в таблицу
-    inline void add(const type& elem)
+    bool add(const type& elem)
     {
+        if (contains(elem)) return false;
         table.insert(elem);
+        return true;
     }
     // Чтение таблицы из файла
     bool read_file(const string& name)
@@ -118,8 +124,19 @@ public:
         }
     }
 
+    int getIndex(const type& elem) const {
+        for (size_t i = 0; i < table.size(); ++i) {
+            if (table[i] == elem) return static_cast<int>(i);
+        }
+        return -1;
+    }
+
     auto begin() const { return table.begin(); }
     auto end() const { return table.end(); }
+
+    int getLexemeCode(int& code_num) const {
+        return code_num;
+    }
 };
 
 #endif //FROMPLUSESTOASSEMBLYLAB1_CONSTANTTABLE_H
