@@ -1,17 +1,29 @@
 #ifndef FROMPLUSESTOASSEMBLYLAB1_VARIABLETABLEV2_0_H
 #define FROMPLUSESTOASSEMBLYLAB1_VARIABLETABLEV2_0_H
 
+/// <summary>
+/// [EN] Using directives of preprocessor
+/// [RU] Используемые директивы препроцессора
+/// </summary>
 #pragma once
 
-//#include "Lexema.h"  // Assuming you have a Lexema class
+/// <summary>
+/// [EN] Libraries that we need to use
+/// [RU] Библиотеки, необходимые для использования
+/// </summary>
 #include <string>
 #include <vector>
 #include <memory>
 #include <fstream>
 #include <limits>
-#include <sstream> // For string streams
+#include <sstream>
 
+/// <summary>
+/// [EN] Global namespaces
+/// [RU] Пространства глобальных имён
+/// </summary>
 using namespace std;
+
 
 enum class LexemeType {
     Undefined,
@@ -30,6 +42,10 @@ struct LexemeAttributes {
     int lexemeTypeSize = 0;
 };
 
+/// <summary>
+/// [EN] Class of Variable Tables
+/// [RU] Класс переменных (хэш таблиц)
+/// </summary>
 class VariableTableV2_0 {
 public:
     explicit VariableTableV2_0(int initialCapacity = 100);  // Constructor

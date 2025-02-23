@@ -240,7 +240,13 @@ LexemeType VariableTableV2_0::determineLexemeType(const string& value) const {
     ss.str(value);
     if (ss >> doubleValue) {
         if (ss.eof()) {
-            return LexemeType::Double;
+            size_t decimalPos = value.find('.');
+            if (decimalPos != string::npos) {
+                size_t digitsAfterDecimal = value.length() - decimalPos - 1;
+                if (digitsAfterDecimal > 7) {
+                    return LexemeType::Double;
+                }
+            }
         }
     }
 
