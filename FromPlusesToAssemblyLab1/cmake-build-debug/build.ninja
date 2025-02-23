@@ -49,29 +49,29 @@ cmake_ninja_workdir = C$:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssem
 
 build cmake_object_order_depends_target_FromPlusesToAssemblyLab1: phony || .
 
-build CMakeFiles/FromPlusesToAssemblyLab1.dir/main.cpp.obj: CXX_COMPILER__FromPlusesToAssemblyLab1_unscanned_Debug C$:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/main.cpp || cmake_object_order_depends_target_FromPlusesToAssemblyLab1
-  DEP_FILE = CMakeFiles\FromPlusesToAssemblyLab1.dir\main.cpp.obj.d
+build CMakeFiles/FromPlusesToAssemblyLab1.dir/test_main.cpp.obj: CXX_COMPILER__FromPlusesToAssemblyLab1_unscanned_Debug C$:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/test_main.cpp || cmake_object_order_depends_target_FromPlusesToAssemblyLab1
+  DEP_FILE = CMakeFiles\FromPlusesToAssemblyLab1.dir\test_main.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\FromPlusesToAssemblyLab1.dir
   OBJECT_FILE_DIR = CMakeFiles\FromPlusesToAssemblyLab1.dir
 
-build CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTable/VariableTable.cpp.obj: CXX_COMPILER__FromPlusesToAssemblyLab1_unscanned_Debug C$:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/VariableTable/VariableTable.cpp || cmake_object_order_depends_target_FromPlusesToAssemblyLab1
-  DEP_FILE = CMakeFiles\FromPlusesToAssemblyLab1.dir\VariableTable\VariableTable.cpp.obj.d
+build CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTableV2_0/VariableTableV2_0.cpp.obj: CXX_COMPILER__FromPlusesToAssemblyLab1_unscanned_Debug C$:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/VariableTableV2_0/VariableTableV2_0.cpp || cmake_object_order_depends_target_FromPlusesToAssemblyLab1
+  DEP_FILE = CMakeFiles\FromPlusesToAssemblyLab1.dir\VariableTableV2_0\VariableTableV2_0.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\FromPlusesToAssemblyLab1.dir
-  OBJECT_FILE_DIR = CMakeFiles\FromPlusesToAssemblyLab1.dir\VariableTable
+  OBJECT_FILE_DIR = CMakeFiles\FromPlusesToAssemblyLab1.dir\VariableTableV2_0
 
-build CMakeFiles/FromPlusesToAssemblyLab1.dir/Lexeme/Lexeme.cpp.obj: CXX_COMPILER__FromPlusesToAssemblyLab1_unscanned_Debug C$:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/Lexeme/Lexeme.cpp || cmake_object_order_depends_target_FromPlusesToAssemblyLab1
-  DEP_FILE = CMakeFiles\FromPlusesToAssemblyLab1.dir\Lexeme\Lexeme.cpp.obj.d
+build CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.obj: CXX_COMPILER__FromPlusesToAssemblyLab1_unscanned_Debug C$:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/LexemeV2_0/LexemeV2_0.cpp || cmake_object_order_depends_target_FromPlusesToAssemblyLab1
+  DEP_FILE = CMakeFiles\FromPlusesToAssemblyLab1.dir\LexemeV2_0\LexemeV2_0.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\FromPlusesToAssemblyLab1.dir
-  OBJECT_FILE_DIR = CMakeFiles\FromPlusesToAssemblyLab1.dir\Lexeme
+  OBJECT_FILE_DIR = CMakeFiles\FromPlusesToAssemblyLab1.dir\LexemeV2_0
 
-build CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTable/ConstantTable.cpp.obj: CXX_COMPILER__FromPlusesToAssemblyLab1_unscanned_Debug C$:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/ConstantTable/ConstantTable.cpp || cmake_object_order_depends_target_FromPlusesToAssemblyLab1
-  DEP_FILE = CMakeFiles\FromPlusesToAssemblyLab1.dir\ConstantTable\ConstantTable.cpp.obj.d
+build CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.obj: CXX_COMPILER__FromPlusesToAssemblyLab1_unscanned_Debug C$:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/ConstantTableV2_0/ConstantTableV2_0.cpp || cmake_object_order_depends_target_FromPlusesToAssemblyLab1
+  DEP_FILE = CMakeFiles\FromPlusesToAssemblyLab1.dir\ConstantTableV2_0\ConstantTableV2_0.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\FromPlusesToAssemblyLab1.dir
-  OBJECT_FILE_DIR = CMakeFiles\FromPlusesToAssemblyLab1.dir\ConstantTable
+  OBJECT_FILE_DIR = CMakeFiles\FromPlusesToAssemblyLab1.dir\ConstantTableV2_0
 
 
 # =============================================================================
@@ -81,7 +81,7 @@ build CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTable/ConstantTable.cpp.ob
 #############################################
 # Link the executable FromPlusesToAssemblyLab1.exe
 
-build FromPlusesToAssemblyLab1.exe: CXX_EXECUTABLE_LINKER__FromPlusesToAssemblyLab1_Debug CMakeFiles/FromPlusesToAssemblyLab1.dir/main.cpp.obj CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTable/VariableTable.cpp.obj CMakeFiles/FromPlusesToAssemblyLab1.dir/Lexeme/Lexeme.cpp.obj CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTable/ConstantTable.cpp.obj
+build FromPlusesToAssemblyLab1.exe: CXX_EXECUTABLE_LINKER__FromPlusesToAssemblyLab1_Debug CMakeFiles/FromPlusesToAssemblyLab1.dir/test_main.cpp.obj CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTableV2_0/VariableTableV2_0.cpp.obj CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.obj CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\FromPlusesToAssemblyLab1.dir

@@ -43,6 +43,7 @@ enum class LexemeType {
 struct LexemeAttributes {
     LexemeType type = LexemeType::Undefined;
     bool initialized = false;
+    int lexemeCode = 0;
 };
 
 // Класс переменных таблиц
@@ -53,10 +54,14 @@ private:
     int hashnum;
     // Указатель на массив цепочек
     vector<Lexeme> *table;
+
+    double rehashFactor = 0.75;
     // Подсчет хэша
     [[nodiscard]] int get_hash(const string& name) const;
     // Подсчет номера в цепочке
     [[nodiscard]] int get_chain(const string& name) const;
+
+    void rehash();
 public:
     // Конструктор с размером таблицы по умолчанию
     VariableTable();
@@ -70,11 +75,21 @@ public:
     //inline bool contains(const string& name);
     [[nodiscard]] bool contains(const string& name) const;
     // Добавление нового имени идентификатора или значения константы
-    bool add(const string& name);
+    bool add(const string& name, const int& lexemeCode);
+
+    void printTable () const;
 
     // bool addAttribute(const string& name, LexemeAttributes attributes);
 
     // bool getAttribute(const string& name, LexemeAttributes& attributes) const;
+
+    bool loadFromFile(const string& filename);
+
+    // Задание кода лексемы по хэшу и номеру в цепочке
+    bool set_lexeme_code(int hash, int chain, int lexemeCode);
+
+    // Задание кода лексемы по имени идентификатора или значению константы
+    bool set_lexeme_code(const string& name, int lexemeCode);
     // Задание типа по хэшу и номеру в цепочке
     bool set_type(int hash, int chain, int type);
     // Задание типа по имени идентификатора или значению константы

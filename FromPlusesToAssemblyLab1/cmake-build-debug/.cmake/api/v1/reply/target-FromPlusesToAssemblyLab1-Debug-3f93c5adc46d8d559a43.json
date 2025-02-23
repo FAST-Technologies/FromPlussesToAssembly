@@ -27,7 +27,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 6,
+				"line" : 12,
 				"parent" : 0
 			}
 		]
@@ -111,25 +111,25 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "main.cpp",
+			"path" : "test_main.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "VariableTable/VariableTable.cpp",
+			"path" : "VariableTableV2_0/VariableTableV2_0.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Lexeme/Lexeme.cpp",
+			"path" : "LexemeV2_0/LexemeV2_0.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "ConstantTable/ConstantTable.cpp",
+			"path" : "ConstantTableV2_0/ConstantTableV2_0.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

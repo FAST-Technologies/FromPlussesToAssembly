@@ -26,7 +26,7 @@ using namespace std;
 
 // Класс для хранения идентификаторов и констант
 class Lexeme
-{
+ {
 public:
     // Имя идентификатора или значение константы
     string name;
@@ -36,6 +36,8 @@ public:
     vector<bool> is_init;
     // Размерность массива, для переменных и констант - 1.
     int dimension{1};
+
+    int lexemeCode{10};
     // Конструктор по умолчанию
     Lexeme();
     // Конструктор с заданием имени идентификатора или значения константы
@@ -50,6 +52,7 @@ public:
             name = other.name;
             type = other.type;
             dimension = other.dimension;
+            lexemeCode = other.lexemeCode;
             is_init = other.is_init;
         }
         return *this;
@@ -67,8 +70,20 @@ public:
     }
 
     // Copy Constructor (Important!)
-    Lexeme(const Lexeme& other) : name(other.name), type(other.type), dimension(other.dimension), is_init(other.is_init) {}
-};
+    Lexeme(const Lexeme& other) : name(other.name), type(other.type), dimension(other.dimension), lexemeCode(other.lexemeCode), is_init(other.is_init) {}
+
+    void print() const {
+        cout << "Name: " << name << endl;
+        cout << "Type: " << type << endl;
+        cout << "Dimension: " << dimension << endl;
+        cout << "Lexeme Code: " << lexemeCode << endl;
+        cout << "Is Initialized: ";
+        for (bool init : is_init) {
+            cout << init << " ";
+        }
+        cout << endl;
+    }
+ };
 
 
 //class Lexeme {

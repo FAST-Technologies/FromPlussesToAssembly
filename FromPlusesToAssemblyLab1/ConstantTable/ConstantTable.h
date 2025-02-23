@@ -64,7 +64,7 @@ public:
             cerr << "Error opening file: " << name << endl;
             throw runtime_error("The error with opening file " + name + " occurred!");
         }
-
+        int lexemeCode;
         type elem;
         while (fs >> elem) {  // Correct EOF handling
             add(elem);
@@ -122,13 +122,6 @@ public:
                 cerr << "Error: Could not get number for element: " << elem << endl;
             }
         }
-    }
-
-    int getIndex(const type& elem) const {
-        for (size_t i = 0; i < table.size(); ++i) {
-            if (table[i] == elem) return static_cast<int>(i);
-        }
-        return -1;
     }
 
     auto begin() const { return table.begin(); }

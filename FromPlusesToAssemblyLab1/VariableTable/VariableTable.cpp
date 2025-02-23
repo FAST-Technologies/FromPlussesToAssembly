@@ -1,3 +1,4 @@
+#include <sstream>
 #include "VariableTable.h"
 
 // Конструктор с размером таблицы по умолчанию
@@ -36,9 +37,31 @@ int VariableTable::get_hash(const string& name) const
     if (name.empty()) return 0;
     int hash = 0;
     for (char c : name) {
-        hash += c;
+        hash += 31 * hash + c;
     }
     return hash % hashnum;
+}
+
+void VariableTable::rehash()
+{
+    int newHash = hashnum * 2;  // Double the capacity
+    auto *newTable(reinterpret_cast<vector<Lexeme> *>(newHash));
+
+
+//    for (const auto& entry : table[h]) {
+//        if (entry.name == name) return false;
+//    }
+    // Rehash all existing elements to the new table
+    for (const auto& entry : table[hashnum]) {
+        size_t newIndex = get_hash(entry.name) % newHash;
+        size_t originalIndex = newIndex;
+        newIndex = (newIndex + 1) % newHash;
+        if (newIndex == originalIndex) break;
+    }
+
+    // Replace the old table with the new table
+    table = std::move(newTable);
+    hashnum = newHash;
 }
 
 //int VariableTable::get_hash(const string& ind_name) const {
@@ -73,7 +96,7 @@ bool VariableTable::contains(const string& name) const {
 }
 
 // Добавление нового имени идентификатора или значения константы
-bool VariableTable::add(const string& name)
+bool VariableTable::add(const string& name, const int& lexemeCode)
 {
     if (contains(name)) {
         cerr << "This identification is already added!" << endl;
@@ -85,6 +108,61 @@ bool VariableTable::add(const string& name)
     }
     table[h].emplace_back(name);
     return true;
+}
+
+bool VariableTable::loadFromFile(const string& filename)
+{
+    auto file = ifstream(filename);
+    if (!file.is_open()) {
+        cerr << "Error opening file: " << filename << endl;
+        return false;
+    }
+
+    string elem;
+    int lexemeCode;
+    while (file >> elem >> lexemeCode) {  // Correct EOF handling
+        // Try to determine if the lexeme is an int, float, or string
+//        LexemeType type = determineLexemeType(line);
+
+        // Decide whether to add as an identifier (30) or constant (40)
+//        int lexemeCode;
+//
+//        if (type == LexemeType::Int || type == LexemeType::Float) {
+//            lexemeCode = 40; // Assume numeric literals are constants
+//        } else {
+//            lexemeCode = 30; // Treat other as identifiers
+//        }
+
+        //add(line, lexemeCode);
+        add(elem, lexemeCode);
+    }
+
+    file.close();
+    return true;
+}
+
+
+// Задание кода лексемы по хэшу и номеру в цепочке
+bool VariableTable::set_lexeme_code(int hash, int chain, int lexemeCode)
+{
+    if (chain == -1 || hash < 0 || hash >= hashnum || hash > default_hashnum) {
+        cerr << "Hash was counted not correct!" << endl;
+        return false;
+    }
+    if (chain < 0 || chain >= static_cast<int>(table[hash].size())) {
+        cerr << "Chain number is incorrect!" << endl;
+        return false;
+    }
+    table[hash][chain].lexemeCode = lexemeCode;
+    return true;
+}
+
+// Задание кода лексемы по имени идентификатора или значению константы
+bool VariableTable::set_lexeme_code(const string& name, int lexemeCode)
+{
+    int hash = get_hash(name);
+    int chain = get_chain(name);
+    return set_lexeme_code(hash, chain, lexemeCode);
 }
 
 // Задание типа по хэшу и номеру в цепочке
@@ -212,6 +290,29 @@ bool VariableTable::get_lexeme(const string& name, Lexeme &lexeme) const
 int VariableTable::getLexemeCode(int& code_num) const {
     return code_num;
 }
+
+//LexemeType VariableTable::determineLexemeType(const string& value) const {
+//    stringstream ss(value);
+//    int intValue;
+//    float floatValue;
+//
+//    if (ss >> intValue) {
+//        if (ss.eof()) { // Ensure the entire string was consumed as an integer
+//            return LexemeType::Int;
+//        } else {
+//            ss.clear(); // Clear error flags
+//            ss.str(value); // Reset stringstream
+//            if (ss >> floatValue && ss.eof()) {
+//                return LexemeType::Float;
+//            } else {
+//                return LexemeType::String; // Treat as a string
+//            }
+//        }
+//    } else {
+//        return LexemeType::String; // Treat as a string
+//    }
+//}
+
 
 
 
