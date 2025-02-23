@@ -1,6 +1,7 @@
 #include "ConstantTableV2_0/ConstantTableV2_0.h"
 #include "VariableTableV2_0/VariableTableV2_0.h"
 #include "SymbolTableV2_0.h"
+//#include <xlsxwriter.h>
 
 
 // Функция установки цвета в консоли
@@ -57,7 +58,7 @@ int main() {
                 LanguageElementType type = entry1->type;
                 int lexemeCode = entry1->lexemeCode;
                 int lexemeTypeSize = entry1->lexemeTypeSize;
-                string typed = constantTableV2_0.lexemeTypeToString(type);
+                string typed = ConstantTableV2_0::lexemeTypeToString(type);
                 SetColor(16, 0);
                 cout << "Symbol: " << symbol << endl;
                 cout << "Lexeme Type: " << typed << endl;
@@ -91,7 +92,6 @@ int main() {
         throw e;
     }
 
-    // **Variable Table Testing**
     try {
         VariableTableV2_0 VariableTableV2_0(50);
         if (VariableTableV2_0.loadFromFile("txtFiles/my_data.txt")) {
@@ -109,9 +109,92 @@ int main() {
 
         // Test ContainsLexeme
         cout << "Contains 'myVariable': " << VariableTableV2_0.containsLexeme("myVariable") << endl;
-        cout << "Contains '7': " << VariableTableV2_0.containsLexeme("Who") << endl;
-        cout << "Contains 'Who': " << VariableTableV2_0.containsLexeme("ab") << endl;
+        cout << "Contains '7': " << VariableTableV2_0.containsLexeme("7") << endl;
+        cout << "Contains 'Who': " << VariableTableV2_0.containsLexeme("Who") << endl;
         cout << "Contains 'nonExistent': " << VariableTableV2_0.containsLexeme("nonExistent") << endl;
+
+        vector<string> names = VariableTableV2_0.get_all_names();
+
+        cout << "Changing types: " << endl;
+        for (const string& name : names) {
+            LexemeAttributes attributes;
+            if (VariableTableV2_0.getAttribute(name, attributes)) {
+                if (attributes.type == LexemeType::String) {
+                    int sized = sizeof(string) * static_cast<int>(name.size());
+                    VariableTableV2_0.set_size(name, sized);
+//                    if (VariableTableV2_0.set_type(name, LexemeType::Double)) {
+//                        std::cout << "Changed type of '" << name << "' from String to Double." << std::endl;
+//                    } else {
+//                        std::cerr << "Failed to set type of '" << name << "'." << std::endl;
+//                    }
+                }
+            }
+        }
+
+        VariableTableV2_0.printTable();
+
+        if (VariableTableV2_0.set_type("Who", LexemeType::Double)) {
+            cout << "Successfully changed 'Who' to Double." << endl;
+        } else {
+            cout << "Failed to change 'Who' to Double (not found)." << endl;
+        }
+
+        if (VariableTableV2_0.set_init("ab", true)) {
+            cout << "Successfully initialized 'ab'." << endl;
+        } else {
+            cout << "Failed to initialize 'ab' (not found)." << endl;
+        }
+
+        VariableTableV2_0.printTable();
+
+        // 1. Add a variable
+        VariableTableV2_0.addLexeme("myVal", LexemeType::Bool);
+
+        VariableTableV2_0.printTable();
+
+        // 2. Create a LexemeAttributes object with the desired attributes
+        LexemeAttributes myIntAttributes;
+        myIntAttributes.type = LexemeType::Int;
+        myIntAttributes.initialized = true;
+        myIntAttributes.lexemeCode = 40;  // Constant
+        myIntAttributes.lexemeTypeSize = sizeof(int);
+
+        // 3. Add the attributes to the variable "myInt"
+        if (VariableTableV2_0.addAttribute("myVal", myIntAttributes)) {
+            std::cout << "Successfully added attributes to 'myVal'." << std::endl;
+        } else {
+            std::cout << "Failed to add attributes to 'myVal' (not found)." << std::endl;
+        }
+
+        VariableTableV2_0.printTable();
+
+        // 4. Retrieve the attributes of "myInt"
+        LexemeAttributes retrievedAttributes;
+        if (VariableTableV2_0.getAttribute("myVal", retrievedAttributes)) {
+            std::cout << "Successfully retrieved attributes for 'myVal'." << std::endl;
+            std::cout << "  Type: ";
+            switch (retrievedAttributes.type) {
+                case LexemeType::Int: std::cout << "Int"; break;
+                case LexemeType::Float: std::cout << "Float"; break;
+                case LexemeType::String: std::cout << "String"; break;
+                    // ... handle other LexemeType values ...
+                default: std::cout << "Unknown"; break;
+            }
+            std::cout << std::endl;
+            std::cout << "  Initialized: " << retrievedAttributes.initialized << std::endl;
+            std::cout << "  Lexeme Code: " << retrievedAttributes.lexemeCode << std::endl;
+            std::cout << "  Lexeme Type Size: " << retrievedAttributes.lexemeTypeSize << std::endl;
+        } else {
+            std::cout << "Failed to retrieve attributes for 'myInt' (not found)." << std::endl;
+        }
+
+        //5. Attempt to retrieve attributes for a non-existing variable
+        LexemeAttributes nonExistingAttributes;
+        if (VariableTableV2_0.getAttribute("nonExistingVar", nonExistingAttributes)) {
+            std::cout << "Successfully retrieved attributes for 'nonExistingVar'." << std::endl;
+        } else {
+            std::cout << "Failed to retrieve attributes for 'nonExistingVar' (not found)." << std::endl;
+        }
 
         VariableTableV2_0.printTable();
 

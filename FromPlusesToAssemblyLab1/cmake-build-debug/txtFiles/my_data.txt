@@ -4,3 +4,4 @@ b Char 30
 3.14 Float 40
 ab String 30
 6.234856756 Double 40
+fi Int 40

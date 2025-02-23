@@ -95,7 +95,7 @@ public:
     /// [EN] String function that gets a type of element from constant table
     /// [RU] Строчная функция получения типа элемента из таблицы констант
     /// </summary>
-    string lexemeTypeToString(LanguageElementType type);
+    static string lexemeTypeToString(LanguageElementType type);
 
     /// <summary>
     /// [EN] Function to check if element already contains in constant table

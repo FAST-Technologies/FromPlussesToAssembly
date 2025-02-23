@@ -1,10 +1,33 @@
 #include "VariableTableV2_0.h"
 
-#include <iostream>
+/// <summary>
+/// [EN] Constructor for VariableTableV2_0 class
+/// [RU] Конструктор класса VariableTableV2_0
+/// </summary>
+VariableTableV2_0::VariableTableV2_0(int initialCapacity) :
+    capacity(initialCapacity),
+    size(0),
+    table(initialCapacity) {}
 
-VariableTableV2_0::VariableTableV2_0(int initialCapacity) : capacity(initialCapacity), size(0), table(initialCapacity) {}
+/// <summary>
+/// [EN] Destructor for VariableTableV2_0 class
+/// [RU] Деструктор класса VariableTableV2_0
+/// </summary>
+VariableTableV2_0::~VariableTableV2_0()
+{
+    //table.clear();
+    for (size_t i = 0; i < capacity; ++i) {
+        if (table[i] != nullptr) {
+            table[i].reset();
+        }
+    }
+    cout << "Object VariableTable is deleted!" << endl;
+}
 
-
+/// <summary>
+/// [EN] Function that return the lexeme size
+/// [RU] Функция, возвращающая размер лексемы
+/// </summary>
 int VariableTableV2_0::lexemeSize(const string& typeStr, const string& symbol)
 {
     int lexemeTypeSize = 0;
@@ -22,7 +45,12 @@ int VariableTableV2_0::lexemeSize(const string& typeStr, const string& symbol)
     return lexemeTypeSize;
 }
 
-bool VariableTableV2_0::loadFromFile(const string& filename) {
+/// <summary>
+/// [EN] Function for loading table data for hash table
+/// [RU] Функция для загрузки данных хэш таблицы
+/// </summary>
+bool VariableTableV2_0::loadFromFile(const string& filename)
+{
     auto file = ifstream(filename);
     if (!file.is_open()) {
         cerr << "Error opening file: " << filename << endl;
@@ -47,10 +75,19 @@ bool VariableTableV2_0::loadFromFile(const string& filename) {
     return true;
 }
 
+bool VariableTableV2_0::addLexeme(const string& name, int& lexemeCode, int& lexemeTypeSize)
+{
+    return addLexeme(name, "Undefined", lexemeCode, lexemeTypeSize);
+}
 
-bool VariableTableV2_0::addLexeme(const string& name, const string& typeStr, int& lexemeCode, int& lexemeTypeSize) {
+/// <summary>
+/// [EN] Function for adding the explicit lexeme to hash table
+/// [RU] Функция для добавления лексемы в хэш-таблицу
+/// </summary>
+bool VariableTableV2_0::addLexeme(const string& name, const string& typeStr, int& lexemeCode, int& lexemeTypeSize)
+{
     if (containsLexeme(name)) return false;
-    if (size >= capacity * loadFactor) {
+    if (static_cast<double>(size) / capacity >= loadFactor) {
         rehash();
     }
 
@@ -68,8 +105,12 @@ bool VariableTableV2_0::addLexeme(const string& name, const string& typeStr, int
     return true;
 }
 
-
-bool VariableTableV2_0::addLexeme(const string& name, LexemeType type) {
+/// <summary>
+/// [EN] Function for adding the explicit lexeme to hash table
+/// [RU] Функция для добавления лексемы в хэш-таблицу
+/// </summary>
+bool VariableTableV2_0::addLexeme(const string& name, LexemeType type)
+{
     int lexemeCode;
     int lexemeTypeSize; // Default size
 
@@ -107,7 +148,24 @@ bool VariableTableV2_0::addLexeme(const string& name, LexemeType type) {
     return addLexeme(name, typeString, lexemeCode, lexemeTypeSize);
 }
 
-string VariableTableV2_0::lexemeTypeToString(LexemeType type) {
+
+vector<string> VariableTableV2_0::get_all_names() const
+{
+    vector<string> names;
+    for (size_t i = 0; i < capacity; ++i) {
+        if (table[i] != nullptr) {
+            names.push_back(table[i]->name);
+        }
+    }
+    return names;
+}
+
+/// <summary>
+/// [EN] Function that transform the lexeme type to string
+/// [RU] Функция для приведения типа лексемы к строчному виду
+/// </summary>
+string VariableTableV2_0::lexemeTypeToString(LexemeType type)
+{
     switch (type) {
         case LexemeType::Undefined:
             return "Undefined";
@@ -124,11 +182,16 @@ string VariableTableV2_0::lexemeTypeToString(LexemeType type) {
         case LexemeType::Char:
             return "Char";
         default:
-            return "Unknown"; // Handle unexpected values
+            return "Unknown";
     }
 }
 
-bool VariableTableV2_0::addAttribute(const string& name, LexemeAttributes attributes) {
+/// <summary>
+/// [EN] Function for adding the attribute of lexeme to hash table
+/// [RU] Функция для добавления атрибутов лексемы в хэш-таблицу
+/// </summary>
+bool VariableTableV2_0::addAttribute(const string& name, LexemeAttributes attributes)
+{
     size_t index = hash(name);
     size_t originalIndex = index; // Track starting point
     while (table[index] != nullptr) {
@@ -143,19 +206,29 @@ bool VariableTableV2_0::addAttribute(const string& name, LexemeAttributes attrib
     return false;
 }
 
-bool VariableTableV2_0::containsLexeme(const string& name) const {
+/// <summary>
+/// [EN] Function that checks the containing of lexeme in hash table
+/// [RU] Функция для проверки содержания лексемы в хэш-таблице
+/// </summary>
+bool VariableTableV2_0::containsLexeme(const string& name) const
+{
     size_t index = hash(name);
     size_t originalIndex = index;
     while (table[index] != nullptr) {
         if (table[index]->name == name) return true;
         index = (index + 1) % capacity;
 
-        if (index == originalIndex) break; // Full loop
+        if (index == originalIndex) break;
     }
     return false;
 }
 
-bool VariableTableV2_0::getAttribute(const string& name, LexemeAttributes& attributes) const {
+/// <summary>
+/// [EN] Function that gets the attribute of lexeme in hash table
+/// [RU] Функция для получения атрибута лексемы в хэш-таблице
+/// </summary>
+bool VariableTableV2_0::getAttribute(const string& name, LexemeAttributes& attributes) const
+{
     size_t index = hash(name);
     size_t originalIndex = index;
     while (table[index] != nullptr) {
@@ -170,6 +243,10 @@ bool VariableTableV2_0::getAttribute(const string& name, LexemeAttributes& attri
     return false;
 }
 
+/// <summary>
+/// [EN] Function for counting the hash sum
+/// [RU] Функция для подсчёта хэш-суммы
+/// </summary
 size_t VariableTableV2_0::hash(const string& key) const {
     size_t hashValue = 0;
     for (char c : key) {
@@ -178,33 +255,101 @@ size_t VariableTableV2_0::hash(const string& key) const {
     return hashValue % capacity;
 }
 
+/// <summary>
+/// [EN] Function for rehashing
+/// [RU] Функция рехеширования
+/// </summary
 void VariableTableV2_0::rehash() {
-    size_t newCapacity = capacity * 2;  // Double the capacity
+    size_t newCapacity = capacity * 2;
     vector<unique_ptr<Entry>> newTable(newCapacity);
+    size_t oldCapacity = capacity;
+    capacity = newCapacity;
 
     // Rehash all existing elements to the new table
-    for (auto& entry : table) {
-        if (entry != nullptr) {
-            size_t newIndex = hash(entry->name) % newCapacity;
-            size_t originalIndex = newIndex;
+    for (size_t i = 0; i < oldCapacity; ++i) {
+        if (table[i] != nullptr) {
+            size_t newIndex = hash(table[i]->name) % capacity; //Recalculate hash based on new capacity
+            size_t originalNewIndex = newIndex;
 
             while (newTable[newIndex] != nullptr) {
-                newIndex = (newIndex + 1) % newCapacity;
-                if (newIndex == originalIndex) break;
+                newIndex = (newIndex + 1) % capacity;  // Linear probing
+                if (newIndex == originalNewIndex) break; //Table full!  This should never happen.
             }
-
-            if (newTable[newIndex] == nullptr) {
-                newTable[newIndex] = std::move(entry); // Move the entry
-            }
+            newTable[newIndex] = std::move(table[i]);  // Move to the new table
         }
     }
 
     // Replace the old table with the new table
     table = std::move(newTable);
-    capacity = newCapacity;
 }
 
-LexemeType VariableTableV2_0::determineLexemeType(const string& value) const {
+/// <summary>
+/// [EN] Function that sets different type for variable
+/// [RU] Функция, устанавливающая другой тип лексемы
+/// </summary>
+bool VariableTableV2_0::set_type(const string& name, LexemeType newType)
+{
+    size_t index = hash(name);
+    size_t originalIndex = index;
+
+    while (table[index] != nullptr) {
+        if (table[index]->name == name) {
+            table[index]->attributes.type = newType;
+            return true; // Successfully updated the type
+        }
+        index = (index + 1) % capacity;
+        if (index == originalIndex) break; // Element not found
+    }
+    return false; // Element not found
+}
+
+/// <summary>
+/// [EN] Function that sets different init status for variable
+/// [RU] Функция, устанавливающая другой статус инициализации лексемы
+/// </summary>
+bool VariableTableV2_0::set_init(const string& name, bool isInitialized)
+{
+    size_t index = hash(name);
+    size_t originalIndex = index;
+
+    while (table[index] != nullptr) {
+        if (table[index]->name == name) {
+            table[index]->attributes.initialized = isInitialized;
+            return true; // Successfully updated the initialization status
+        }
+        index = (index + 1) % capacity;
+        if (index == originalIndex) break; // Element not found
+    }
+    return false; // Element not found
+}
+
+/// <summary>
+/// [EN] Function that sets different size for variable
+/// [RU] Функция, устанавливающая другой размер лексемы
+/// </summary>
+bool VariableTableV2_0::set_size(const string& name, int lexemeTypeSize)
+{
+    size_t index = hash(name);
+    size_t originalIndex = index;
+
+    while (table[index] != nullptr) {
+        if (table[index]->name == name) {
+            table[index]->attributes.lexemeTypeSize = lexemeTypeSize;
+            return true; // Successfully updated the initialization status
+        }
+        index = (index + 1) % capacity;
+        if (index == originalIndex) break; // Element not found
+    }
+    return false; // Element not found
+}
+
+
+/// <summary>
+/// [EN] Helper function to determine LexemeType
+/// [RU] Вспомогательная функция для вычленения LexemeType
+/// </summary
+LexemeType VariableTableV2_0::determineLexemeType(const string& value)
+{
     stringstream ss(value);
     int intValue;
     float floatValue;
@@ -260,23 +405,12 @@ LexemeType VariableTableV2_0::determineLexemeType(const string& value) const {
     }
 
     return LexemeType::String;
-//    if (ss >> intValue) {
-//        if (ss.eof()) { // Ensure the entire string was consumed as an integer
-//            return LexemeType::Int;
-//        } else {
-//            ss.clear(); // Clear error flags
-//            ss.str(value); // Reset stringstream
-//            if (ss >> floatValue && ss.eof()) {
-//                return LexemeType::Float;
-//            } else {
-//                return LexemeType::String; // Treat as a string
-//            }
-//        }
-//    } else {
-//        return LexemeType::String; // Treat as a string
-//    }
 }
 
+/// <summary>
+/// [EN] Function that prints the hash table
+/// [RU] Функция для вывода данных хэш-таблицы
+/// </summary>
 void VariableTableV2_0::printTable() const {
     cout << "Variable Table Contents:" << endl;
     for (size_t i = 0; i < capacity; ++i) {
@@ -318,3 +452,5 @@ void VariableTableV2_0::printTable() const {
         }
     }
 }
+
+

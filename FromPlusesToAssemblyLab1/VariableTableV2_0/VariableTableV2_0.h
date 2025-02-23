@@ -17,6 +17,7 @@
 #include <fstream>
 #include <limits>
 #include <sstream>
+#include <iostream>
 
 /// <summary>
 /// [EN] Global namespaces
@@ -24,7 +25,10 @@
 /// </summary>
 using namespace std;
 
-
+/// <summary>
+/// [EN] Enum of lexeme types for Variable Tables
+/// [RU] Enum различных типов лексем для переменных (хэш) таблиц
+/// </summary>
 enum class LexemeType {
     Undefined,
     Int,
@@ -35,10 +39,18 @@ enum class LexemeType {
     Bool
 };
 
+/// <summary>
+/// [EN] Struct of types of Variable Tables
+/// [RU] Структура типов переменных (хэш) таблиц
+/// </summary>
 struct LexemeAttributes {
+    /// Тип рассматриваемой переменной
     LexemeType type = LexemeType::Undefined;
+    /// Вектор инициализации (по умолчанию false)
     bool initialized = false;
-    int lexemeCode = 30;
+    /// Код лексемы (принимает 30 - для идентификаторов и 40 - для констант)
+    int lexemeCode = 0;
+    /// Размер типа лексемы (Рассматриваются int, float, double, char и string)
     int lexemeTypeSize = 0;
 };
 
@@ -48,47 +60,140 @@ struct LexemeAttributes {
 /// </summary>
 class VariableTableV2_0 {
 public:
-    explicit VariableTableV2_0(int initialCapacity = 100);  // Constructor
+    /// <summary>
+    /// [EN] Constructor for VariableTableV2_0 class
+    /// [RU] Конструктор класса VariableTableV2_0
+    /// </summary>
+    explicit VariableTableV2_0(int initialCapacity = 100);
 
-    // New method to load from file
+    /// <summary>
+    /// [EN] Destructor for VariableTableV2_0 class
+    /// [RU] Деструктор класса VariableTableV2_0
+    /// </summary>
+    ~VariableTableV2_0();
+
+    /// <summary>
+    /// [EN] Function for loading table data for hash table
+    /// [RU] Функция для загрузки данных хэш таблицы
+    /// </summary>
     bool loadFromFile(const string& filename);
 
-    // Add with explicit lexeme code (30 for identifier, 40 for constant)
-    bool addLexeme(const string& name, const string& typeStr, int& lexemeCode, int& lexemeTypeSize);
+    bool addLexeme(const string& name, int& lexemeCode, int& lexemeTypeSize); // Overloaded addLexeme
 
-    // Legacy add, automatically determines type and assumes 30
+    /// <summary>
+    /// [EN] Function for adding the explicit lexeme to hash table
+    /// [RU] Функция для добавления лексемы в хэш-таблицу
+    /// </summary>
     bool addLexeme(const string& name, LexemeType type = LexemeType::Undefined);
+
+    /// <summary>
+    /// [EN] Function for adding the attribute of lexeme to hash table
+    /// [RU] Функция для добавления атрибутов лексемы в хэш-таблицу
+    /// </summary>
     bool addAttribute(const string& name, LexemeAttributes attributes);
+
+    /// <summary>
+    /// [EN] Function that checks the containing of lexeme in hash table
+    /// [RU] Функция для проверки содержания лексемы в хэш-таблице
+    /// </summary>
     [[nodiscard]] bool containsLexeme(const string& name) const;
 
-    // Get attribute
+    /// <summary>
+    /// [EN] Function that gets the attribute of lexeme in hash table
+    /// [RU] Функция для получения атрибута лексемы в хэш-таблице
+    /// </summary>
     bool getAttribute(const string& name, LexemeAttributes& attributes) const;
 
+    /// <summary>
+    /// [EN] Function that prints the hash table
+    /// [RU] Функция для вывода данных хэш-таблицы
+    /// </summary>
     void printTable() const;
 
-    string lexemeTypeToString(LexemeType type);
+    /// <summary>
+    /// [EN] Function that transform the lexeme type to string
+    /// [RU] Функция для приведения типа лексемы к строчному виду
+    /// </summary>
+    static string lexemeTypeToString(LexemeType type);
 
+    /// <summary>
+    /// [EN] Function that return the lexeme size
+    /// [RU] Функция, возвращающая размер лексемы
+    /// </summary>
     static int lexemeSize(const string& typeStr, const string& symbol);
 
+    /// <summary>
+    /// [EN] Function that sets different type for variable
+    /// [RU] Функция, устанавливающая другой тип лексемы
+    /// </summary>
+    bool set_type(const string& name, LexemeType newType);
+
+    /// <summary>
+    /// [EN] Function that sets different init status for variable
+    /// [RU] Функция, устанавливающая другой статус инициализации лексемы
+    /// </summary>
+    bool set_init(const string& name, bool isInitialized);
+
+    /// <summary>
+    /// [EN] Function that sets different size for variable
+    /// [RU] Функция, устанавливающая другой размер лексемы
+    /// </summary>
+    bool set_size(const string& name, int lexemeTypeSize);
+
+    [[nodiscard]] vector<string> get_all_names() const;
+
 private:
+    /// <summary>
+    /// [EN] Hash table structure: variable name and attributes
+    /// [RU] Структура хэш-таблицы: переменная и её атрибуты
+    /// </summary>
     struct Entry {
         string name;
         LexemeAttributes attributes;
     };
 
+    /// Хэш-таблица
     vector<unique_ptr<Entry>> table;  // Hash table
-    size_t capacity;                            // Current capacity
-    size_t size;                                // Number of elements
+
+    /// <summary>
+    /// [EN] Hash table capacity size
+    /// [RU] Текущая вместимость хэш таблицы
+    /// </summary>
+    size_t capacity;
+
+    /// <summary>
+    /// [EN] Current size of hash table
+    /// [RU] Текущий размер хэш таблицы
+    /// </summary>
+    size_t size;
+
+
     double loadFactor = 0.75;                    // Load factor for rehashing
 
-    // Hash function (simple, replace with a better one)
+    /// <summary>
+    /// [EN] Function for counting the hash sum
+    /// [RU] Функция для подсчёта хэш-суммы
+    /// </summary
     [[nodiscard]] size_t hash(const string& key) const;
 
     // Rehash function (resize and redistribute elements)
+    /// <summary>
+    /// [EN] Function for rehashing
+    /// [RU] Функция рехеширования
+    /// </summary
     void rehash();
 
-    // Helper function to determine LexemeType
-    [[nodiscard]] LexemeType determineLexemeType(const string& value) const;
+    /// <summary>
+    /// [EN] Helper function to determine LexemeType
+    /// [RU] Вспомогательная функция для вычленения LexemeType
+    /// </summary
+    [[nodiscard]] static LexemeType determineLexemeType(const string& value) ;
+
+    /// <summary>
+    /// [EN] Function for adding the explicit lexeme to hash table
+    /// [RU] Функция для добавления лексемы в хэш-таблицу
+    /// </summary>
+    bool addLexeme(const string& name, const string& typeStr, int& lexemeCode, int& lexemeTypeSize);
 };
 
 

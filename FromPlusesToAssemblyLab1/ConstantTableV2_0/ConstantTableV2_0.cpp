@@ -149,7 +149,7 @@ optional<ConstantTableEntry> ConstantTableV2_0::getElementAtIndex(int index) con
     if (index < 0 || index >= static_cast<int>(table.size())) {
         return std::nullopt; // Indicate that no element was found
     }
-    return table[index]; // Return the element wrapped in std::optional
+    return table[index];
 }
 
 /// <summary>
@@ -159,7 +159,7 @@ optional<ConstantTableEntry> ConstantTableV2_0::getElementAtIndex(int index) con
 bool ConstantTableV2_0::check(const string& symbol) const
 {
     if (binarySearch(symbol) == -1) {
-        throw std::out_of_range("Element not found in ConstantTable: " + symbol);
+        throw out_of_range("Element not found in ConstantTable: " + symbol);
     }
     return true;
 }
