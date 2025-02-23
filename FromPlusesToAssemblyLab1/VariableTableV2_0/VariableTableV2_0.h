@@ -140,6 +140,10 @@ public:
     /// </summary>
     bool set_size(const string& name, int lexemeTypeSize);
 
+    /// <summary>
+    /// [EN] Function that ables to get all names of variables
+    /// [RU] Функция, которая позволяет получать все имена переменных
+    /// </summary>
     [[nodiscard]] vector<string> get_all_names() const;
 
 private:

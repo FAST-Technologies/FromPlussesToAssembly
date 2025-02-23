@@ -3,12 +3,6 @@ project(FromPlusesToAssemblyLab1)
 
 set(CMAKE_CXX_STANDARD 20)
 
-#add_executable(FromPlusesToAssemblyLab1 main.cpp
-#        VariableTable/VariableTable.cpp
-#        Lexeme/Lexeme.cpp
-#        ConstantTable/ConstantTable.cpp
-#        Constants.h)
-
 add_executable(FromPlusesToAssemblyLab1 test_main.cpp
         VariableTableV2_0/VariableTableV2_0.cpp
         LexemeV2_0/LexemeV2_0.cpp

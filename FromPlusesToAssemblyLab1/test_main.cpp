@@ -161,9 +161,9 @@ int main() {
 
         // 3. Add the attributes to the variable "myInt"
         if (VariableTableV2_0.addAttribute("myVal", myIntAttributes)) {
-            std::cout << "Successfully added attributes to 'myVal'." << std::endl;
+            cout << "Successfully added attributes to 'myVal'." << endl;
         } else {
-            std::cout << "Failed to add attributes to 'myVal' (not found)." << std::endl;
+            cout << "Failed to add attributes to 'myVal' (not found)." << endl;
         }
 
         VariableTableV2_0.printTable();
@@ -171,29 +171,29 @@ int main() {
         // 4. Retrieve the attributes of "myInt"
         LexemeAttributes retrievedAttributes;
         if (VariableTableV2_0.getAttribute("myVal", retrievedAttributes)) {
-            std::cout << "Successfully retrieved attributes for 'myVal'." << std::endl;
-            std::cout << "  Type: ";
+            cout << "Successfully retrieved attributes for 'myVal'." << endl;
+            cout << "  Type: ";
             switch (retrievedAttributes.type) {
-                case LexemeType::Int: std::cout << "Int"; break;
-                case LexemeType::Float: std::cout << "Float"; break;
-                case LexemeType::String: std::cout << "String"; break;
+                case LexemeType::Int: cout << "Int"; break;
+                case LexemeType::Float: cout << "Float"; break;
+                case LexemeType::String: cout << "String"; break;
                     // ... handle other LexemeType values ...
-                default: std::cout << "Unknown"; break;
+                default: cout << "Unknown"; break;
             }
-            std::cout << std::endl;
-            std::cout << "  Initialized: " << retrievedAttributes.initialized << std::endl;
-            std::cout << "  Lexeme Code: " << retrievedAttributes.lexemeCode << std::endl;
-            std::cout << "  Lexeme Type Size: " << retrievedAttributes.lexemeTypeSize << std::endl;
+            cout << endl;
+            cout << "  Initialized: " << retrievedAttributes.initialized << endl;
+            cout << "  Lexeme Code: " << retrievedAttributes.lexemeCode << endl;
+            cout << "  Lexeme Type Size: " << retrievedAttributes.lexemeTypeSize << endl;
         } else {
-            std::cout << "Failed to retrieve attributes for 'myInt' (not found)." << std::endl;
+            cout << "Failed to retrieve attributes for 'myInt' (not found)." << endl;
         }
 
         //5. Attempt to retrieve attributes for a non-existing variable
         LexemeAttributes nonExistingAttributes;
         if (VariableTableV2_0.getAttribute("nonExistingVar", nonExistingAttributes)) {
-            std::cout << "Successfully retrieved attributes for 'nonExistingVar'." << std::endl;
+            cout << "Successfully retrieved attributes for 'nonExistingVar'." << endl;
         } else {
-            std::cout << "Failed to retrieve attributes for 'nonExistingVar' (not found)." << std::endl;
+            cout << "Failed to retrieve attributes for 'nonExistingVar' (not found)." << endl;
         }
 
         VariableTableV2_0.printTable();

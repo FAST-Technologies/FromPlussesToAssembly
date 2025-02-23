@@ -148,7 +148,10 @@ bool VariableTableV2_0::addLexeme(const string& name, LexemeType type)
     return addLexeme(name, typeString, lexemeCode, lexemeTypeSize);
 }
 
-
+/// <summary>
+/// [EN] Function that ables to get all names of variables
+/// [RU] Функция, которая позволяет получать все имена переменных
+/// </summary>
 vector<string> VariableTableV2_0::get_all_names() const
 {
     vector<string> names;
