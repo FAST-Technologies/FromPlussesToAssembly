@@ -1,52 +1,74 @@
+/// <summary>
+/// [EN] Linked libraries and headers
+/// [RU] Подключаемые библиотеки и заголовки
+/// </summary>
 #include "ConstantTableV2_0/ConstantTableV2_0.h"
 #include "VariableTableV2_0/VariableTableV2_0.h"
+#include "OutputModuleV2_0/OutputModuleV2_0.h"
 #include "SymbolTableV2_0.h"
-//#include <xlsxwriter.h>
+#include "Constants.h"
+/// Library for work with xlsx files under C++
+#include <xlsxwriter.h>
 
-
-// Функция установки цвета в консоли
-void SetColor(int textColor, int bgColor) {
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, (bgColor << 4) | textColor);
-}
-
-int main() {
-
+int main()
+{
     setlocale(LC_ALL, "");
     cout.flags(ios::fixed);
     cout.setf(ios_base::fixed);
 
-    // Использование лямбда - функции
+    /// Использование лямбда - функции
     auto hello { [](){ cout << "Welcome to first Assembly lab V2_0!" << endl; } };
     hello();
+
+    const char* cConstantTableXLSX = GlobalPaths::ConstantTableXLSX.c_str();
+    const char* cVariableTableXLSX = GlobalPaths::VariableTableXLSX.c_str();
     // **Constant Table Testing**
     try {
-        ConstantTableV2_0 constantTableV2_0("txtFiles/constant_table_data.txt"); // Load from file
+        ConstantTableV2_0 constantTableV2_0(GlobalPaths::ConstantTableD);
 
-        cout << "Constant Table Contents:" << endl;
+        cout << "Constant Table Contents: " << endl;
         vector<ConstantTableEntry> table = constantTableV2_0.getTable();
         int num = 0;
         for (const auto& entry : table) {
             num += 1;
-            if (entry.lexemeTypeSize == 1) {
-                if (static_cast<int>(entry.type) == 1) {
-                    cout << num << " : ReservedWord: " << entry.symbol << " Type: " << static_cast<int>(entry.type) << " Lexeme Code: " <<  entry.lexemeCode << " Lexeme Type Size: " << entry.lexemeTypeSize << " (char)" << endl;
-                } else if (static_cast<int>(entry.type) == 2) {
-                    cout << num << " : Operator: " << entry.symbol << " Type: " << static_cast<int>(entry.type) << " Lexeme Code: " <<  entry.lexemeCode << " Lexeme Type Size: " << entry.lexemeTypeSize << " (char)" << endl;
-                } else if (static_cast<int>(entry.type) == 3) {
-                    cout << num << " : Separator: " << entry.symbol << " Type: " << static_cast<int>(entry.type) << " Lexeme Code: " <<  entry.lexemeCode << " Lexeme Type Size: " << entry.lexemeTypeSize << " (char)" << endl;
-                }
-
-            } else {
-                if (static_cast<int>(entry.type) == 1) {
-                    cout << num << " : ReservedWord: " << entry.symbol << " Type: " << static_cast<int>(entry.type) << " Lexeme Code: " <<  entry.lexemeCode << " Lexeme Type Size: " << entry.lexemeTypeSize << " (string)" << endl;
-                } else if (static_cast<int>(entry.type) == 2) {
-                    cout << num << " : Operator: " << entry.symbol << " Type: " << static_cast<int>(entry.type) << " Lexeme Code: " <<  entry.lexemeCode << " Lexeme Type Size: " << entry.lexemeTypeSize << " (string)" << endl;
-                } else if (static_cast<int>(entry.type) == 3) {
-                    cout << num << " : Separator: " << entry.symbol << " Type: " << static_cast<int>(entry.type) << " Lexeme Code: " <<  entry.lexemeCode << " Lexeme Type Size: " << entry.lexemeTypeSize << " (string)" << endl;
-                }
-            }
+            outputConstantTableEntry(num, entry);
         }
+
+        lxw_workbook* workbook1 = workbook_new(cConstantTableXLSX);
+        if (!workbook1) {
+            cerr << "Error creating workbook!" << endl;
+            return 1;
+        }
+
+        lxw_worksheet* worksheet1 = workbook_add_worksheet(workbook1, "Constant Data");
+        if (!worksheet1) {
+            cerr << "Error creating worksheet!" << endl;
+            workbook_close(workbook1);
+            lxw_workbook_free(workbook1);
+            return 1;
+        }
+
+        vector<ConstantTableEntry> table1 = constantTableV2_0.getTable();
+
+        worksheet_write_string(worksheet1, 0, 0, "Name", nullptr);
+        worksheet_write_string(worksheet1, 0, 1, "Type", nullptr);
+        worksheet_write_string(worksheet1, 0, 2, "Lexeme Code", nullptr);
+        worksheet_write_string(worksheet1, 0, 3, "Lexeme Type Size", nullptr);
+
+        int row = 1;
+
+        for (const auto& entry : table1) {
+            worksheet_write_string(worksheet1, row, 0, entry.symbol.c_str(), nullptr);
+            string typeString = ConstantTableV2_0::lexemeTypeToString(entry.type);
+            worksheet_write_string(worksheet1, row, 1, typeString.c_str(), nullptr);
+            worksheet_write_number(worksheet1, row, 2, entry.lexemeCode, nullptr);
+            worksheet_write_number(worksheet1, row, 3, entry.lexemeTypeSize, nullptr);
+            row += 1;
+        }
+
+        workbook_close(workbook1);
+        cout << "Successfully wrote data to " + GlobalPaths::ConstantTableXLSX << endl;
+
         int indexVal;
         cout << "Type index for search: ";
         cin >> indexVal;
@@ -72,8 +94,9 @@ int main() {
             " (finding the value out of range)");
         }
 
+
         // Test Contains
-        cout << "Contains 'Begin': " << constantTableV2_0.contains("void") << endl;
+        cout << "Contains 'void': " << constantTableV2_0.contains("void") << endl;
         cout << "Contains 'Unknown': " << constantTableV2_0.contains("Unknown") << endl;
         cout << "Contains '::': " << constantTableV2_0.contains("::") << endl;
         // Test GetIndex
@@ -93,14 +116,35 @@ int main() {
     }
 
     try {
+
         VariableTableV2_0 VariableTableV2_0(50);
-        if (VariableTableV2_0.loadFromFile("txtFiles/my_data.txt")) {
+        if (VariableTableV2_0.loadFromFile(GlobalPaths::VariableTableD)) {
             cout << "Successfully loaded from file!" << endl;
         } else {
             SetColor(14,0);
             cerr << "Failed to load from file." << endl;
         }
         SetColor(15,0);
+
+        lxw_workbook* workbook = workbook_new(cVariableTableXLSX);
+        if (!workbook) {
+            cerr << "Error creating workbook!" << endl;
+            return 1;
+        }
+
+        lxw_worksheet* worksheet = workbook_add_worksheet(workbook, "Variable Data");
+        if (!worksheet) {
+            cerr << "Error creating worksheet!" << endl;
+            workbook_close(workbook);
+            lxw_workbook_free(workbook);
+            return 1;
+        }
+
+        worksheet_write_string(worksheet, 0, 0, "Name", nullptr);
+        worksheet_write_string(worksheet, 0, 1, "Type", nullptr);
+        worksheet_write_string(worksheet, 0, 2, "Initialized", nullptr);
+        worksheet_write_string(worksheet, 0, 3, "Lexeme Code", nullptr);
+        worksheet_write_string(worksheet, 0, 4, "Lexeme Type Size", nullptr);
         // Test AddLexeme
         VariableTableV2_0.addLexeme("myVariable", LexemeType::Int);
         VariableTableV2_0.addLexeme("-7.1", LexemeType::Float);
@@ -120,13 +164,8 @@ int main() {
             LexemeAttributes attributes;
             if (VariableTableV2_0.getAttribute(name, attributes)) {
                 if (attributes.type == LexemeType::String) {
-                    int sized = sizeof(string) * static_cast<int>(name.size());
+                    int sized = static_cast<int>(sizeof(string) * name.size());
                     VariableTableV2_0.set_size(name, sized);
-//                    if (VariableTableV2_0.set_type(name, LexemeType::Double)) {
-//                        std::cout << "Changed type of '" << name << "' from String to Double." << std::endl;
-//                    } else {
-//                        std::cerr << "Failed to set type of '" << name << "'." << std::endl;
-//                    }
                 }
             }
         }
@@ -177,13 +216,54 @@ int main() {
                 case LexemeType::Int: cout << "Int"; break;
                 case LexemeType::Float: cout << "Float"; break;
                 case LexemeType::String: cout << "String"; break;
-                    // ... handle other LexemeType values ...
                 default: cout << "Unknown"; break;
             }
             cout << endl;
             cout << "  Initialized: " << retrievedAttributes.initialized << endl;
             cout << "  Lexeme Code: " << retrievedAttributes.lexemeCode << endl;
             cout << "  Lexeme Type Size: " << retrievedAttributes.lexemeTypeSize << endl;
+
+            vector<string> names1 = VariableTableV2_0.get_all_names();
+
+            int row = 1;
+            for (const string& name : names) {
+                LexemeAttributes attributes;
+                if (VariableTableV2_0.getAttribute(name, attributes)) {
+                    worksheet_write_string(worksheet, row, 0, name.c_str(), nullptr);
+
+                    string typeString;
+                    switch (attributes.type) {
+                        case LexemeType::Int: typeString = "Int"; break;
+                        case LexemeType::Float: typeString = "Float"; break;
+                        case LexemeType::String: typeString = "String"; break;
+                        case LexemeType::Bool: typeString = "Bool"; break;
+                        case LexemeType::Char: typeString = "Char"; break;
+                        case LexemeType::Double: typeString = "Double"; break;
+                        default: typeString = "Undefined"; break;
+                    }
+                    worksheet_write_string(worksheet, row, 1, typeString.c_str(), nullptr); // Type
+
+                    worksheet_write_boolean(worksheet, row, 2, attributes.initialized, nullptr); // Initialized
+                    worksheet_write_number(worksheet, row, 3, attributes.lexemeCode, nullptr);  // Lexeme Code
+                    worksheet_write_number(worksheet, row, 4, attributes.lexemeTypeSize, nullptr); // Lexeme Type Size
+
+                    row++;
+                }
+            }
+
+            workbook_close(workbook);
+            cout << "Successfully wrote data to " + GlobalPaths::VariableTableXLSX<< endl;
+
+            VariableTableV2_0.remove_lexeme("myVariable");
+            cout << "myVariable was successfully removed" << endl;
+
+            VariableTableV2_0.printTable();
+
+            VariableTableV2_0.remove_lexeme_without_name(40, LexemeType::Int, false);
+
+            cout << "All data was successfully removed" << endl;
+            VariableTableV2_0.printTable();
+
         } else {
             cout << "Failed to retrieve attributes for 'myInt' (not found)." << endl;
         }
@@ -203,6 +283,5 @@ int main() {
         cerr << "Exception during Variable Table testing: " << e.what() << endl;
         throw e;
     }
-
     return 0;
 }

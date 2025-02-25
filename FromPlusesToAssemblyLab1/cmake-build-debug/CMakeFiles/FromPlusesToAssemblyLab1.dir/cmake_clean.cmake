@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.obj"
   "CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.obj.d"
-  "CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.obj"
-  "CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.obj.d"
+  "CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.obj"
+  "CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.obj.d"
   "CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTableV2_0/VariableTableV2_0.cpp.obj"
   "CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTableV2_0/VariableTableV2_0.cpp.obj.d"
   "CMakeFiles/FromPlusesToAssemblyLab1.dir/test_main.cpp.obj"

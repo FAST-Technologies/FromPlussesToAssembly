@@ -69,6 +69,7 @@ include CMakeFiles/FromPlusesToAssemblyLab1.dir/progress.make
 include CMakeFiles/FromPlusesToAssemblyLab1.dir/flags.make
 
 CMakeFiles/FromPlusesToAssemblyLab1.dir/test_main.cpp.obj: CMakeFiles/FromPlusesToAssemblyLab1.dir/flags.make
+CMakeFiles/FromPlusesToAssemblyLab1.dir/test_main.cpp.obj: CMakeFiles/FromPlusesToAssemblyLab1.dir/includes_CXX.rsp
 CMakeFiles/FromPlusesToAssemblyLab1.dir/test_main.cpp.obj: C:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/test_main.cpp
 CMakeFiles/FromPlusesToAssemblyLab1.dir/test_main.cpp.obj: CMakeFiles/FromPlusesToAssemblyLab1.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/FromPlusesToAssemblyLab1.dir/test_main.cpp.obj"
@@ -83,6 +84,7 @@ CMakeFiles/FromPlusesToAssemblyLab1.dir/test_main.cpp.s: cmake_force
 	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\test_main.cpp -o CMakeFiles\FromPlusesToAssemblyLab1.dir\test_main.cpp.s
 
 CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTableV2_0/VariableTableV2_0.cpp.obj: CMakeFiles/FromPlusesToAssemblyLab1.dir/flags.make
+CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTableV2_0/VariableTableV2_0.cpp.obj: CMakeFiles/FromPlusesToAssemblyLab1.dir/includes_CXX.rsp
 CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTableV2_0/VariableTableV2_0.cpp.obj: C:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/VariableTableV2_0/VariableTableV2_0.cpp
 CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTableV2_0/VariableTableV2_0.cpp.obj: CMakeFiles/FromPlusesToAssemblyLab1.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTableV2_0/VariableTableV2_0.cpp.obj"
@@ -96,24 +98,11 @@ CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTableV2_0/VariableTableV2_0.cpp.
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTableV2_0/VariableTableV2_0.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\VariableTableV2_0\VariableTableV2_0.cpp -o CMakeFiles\FromPlusesToAssemblyLab1.dir\VariableTableV2_0\VariableTableV2_0.cpp.s
 
-CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.obj: CMakeFiles/FromPlusesToAssemblyLab1.dir/flags.make
-CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.obj: C:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/LexemeV2_0/LexemeV2_0.cpp
-CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.obj: CMakeFiles/FromPlusesToAssemblyLab1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.obj -MF CMakeFiles\FromPlusesToAssemblyLab1.dir\LexemeV2_0\LexemeV2_0.cpp.obj.d -o CMakeFiles\FromPlusesToAssemblyLab1.dir\LexemeV2_0\LexemeV2_0.cpp.obj -c C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\LexemeV2_0\LexemeV2_0.cpp
-
-CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\LexemeV2_0\LexemeV2_0.cpp > CMakeFiles\FromPlusesToAssemblyLab1.dir\LexemeV2_0\LexemeV2_0.cpp.i
-
-CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\LexemeV2_0\LexemeV2_0.cpp -o CMakeFiles\FromPlusesToAssemblyLab1.dir\LexemeV2_0\LexemeV2_0.cpp.s
-
 CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.obj: CMakeFiles/FromPlusesToAssemblyLab1.dir/flags.make
+CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.obj: CMakeFiles/FromPlusesToAssemblyLab1.dir/includes_CXX.rsp
 CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.obj: C:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/ConstantTableV2_0/ConstantTableV2_0.cpp
 CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.obj: CMakeFiles/FromPlusesToAssemblyLab1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.obj"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.obj -MF CMakeFiles\FromPlusesToAssemblyLab1.dir\ConstantTableV2_0\ConstantTableV2_0.cpp.obj.d -o CMakeFiles\FromPlusesToAssemblyLab1.dir\ConstantTableV2_0\ConstantTableV2_0.cpp.obj -c C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\ConstantTableV2_0\ConstantTableV2_0.cpp
 
 CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.i: cmake_force
@@ -124,20 +113,35 @@ CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\ConstantTableV2_0\ConstantTableV2_0.cpp -o CMakeFiles\FromPlusesToAssemblyLab1.dir\ConstantTableV2_0\ConstantTableV2_0.cpp.s
 
+CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.obj: CMakeFiles/FromPlusesToAssemblyLab1.dir/flags.make
+CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.obj: CMakeFiles/FromPlusesToAssemblyLab1.dir/includes_CXX.rsp
+CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.obj: C:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/OutputModuleV2_0/OutputModuleV2_0.cpp
+CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.obj: CMakeFiles/FromPlusesToAssemblyLab1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.obj -MF CMakeFiles\FromPlusesToAssemblyLab1.dir\OutputModuleV2_0\OutputModuleV2_0.cpp.obj.d -o CMakeFiles\FromPlusesToAssemblyLab1.dir\OutputModuleV2_0\OutputModuleV2_0.cpp.obj -c C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\OutputModuleV2_0\OutputModuleV2_0.cpp
+
+CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\OutputModuleV2_0\OutputModuleV2_0.cpp > CMakeFiles\FromPlusesToAssemblyLab1.dir\OutputModuleV2_0\OutputModuleV2_0.cpp.i
+
+CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\OutputModuleV2_0\OutputModuleV2_0.cpp -o CMakeFiles\FromPlusesToAssemblyLab1.dir\OutputModuleV2_0\OutputModuleV2_0.cpp.s
+
 # Object files for target FromPlusesToAssemblyLab1
 FromPlusesToAssemblyLab1_OBJECTS = \
 "CMakeFiles/FromPlusesToAssemblyLab1.dir/test_main.cpp.obj" \
 "CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTableV2_0/VariableTableV2_0.cpp.obj" \
-"CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.obj" \
-"CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.obj"
+"CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.obj" \
+"CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.obj"
 
 # External object files for target FromPlusesToAssemblyLab1
 FromPlusesToAssemblyLab1_EXTERNAL_OBJECTS =
 
 FromPlusesToAssemblyLab1.exe: CMakeFiles/FromPlusesToAssemblyLab1.dir/test_main.cpp.obj
 FromPlusesToAssemblyLab1.exe: CMakeFiles/FromPlusesToAssemblyLab1.dir/VariableTableV2_0/VariableTableV2_0.cpp.obj
-FromPlusesToAssemblyLab1.exe: CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.obj
 FromPlusesToAssemblyLab1.exe: CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.obj
+FromPlusesToAssemblyLab1.exe: CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.obj
 FromPlusesToAssemblyLab1.exe: CMakeFiles/FromPlusesToAssemblyLab1.dir/build.make
 FromPlusesToAssemblyLab1.exe: CMakeFiles/FromPlusesToAssemblyLab1.dir/linkLibs.rsp
 FromPlusesToAssemblyLab1.exe: CMakeFiles/FromPlusesToAssemblyLab1.dir/objects1.rsp

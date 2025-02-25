@@ -8,10 +8,9 @@
 #include <iostream>
 #include <stdexcept>
 #include <fstream>
+/// Library for windows console and utils
 #include <windows.h>
-//#include "ConstantTable/ConstantTable.h"
-//#include "VariableTable/VariableTable.h"
-//#include "Lexeme/Lexeme.h"
+
 
 /// <summary>
 /// [EN] Global namespaces
@@ -24,12 +23,25 @@ using namespace std;
 /// [RU] Пути до файлов
 /// </summary>
 namespace GlobalPaths {
-    const string filesDir = "./txtFiles/";
-    const string wordsPath = filesDir + "reserved_words.txt";
-    const string wordPathNew = filesDir + "reserved_words_new.txt";
-    const string identPathNew = filesDir + "identifiers_new.txt";
-    const string divisorPathNew = filesDir + "separators_new.txt";
-    const string constantsPathNew = filesDir + "constants_new.txt";
+    /// Paths to files (txt && xlsx)
+    const string txtFilesDir = "./txtFiles/";
+    const string xlsxFilesDir = "./xlsxFiles/";
+    /// First attempt file
+    const string wordsPath = txtFilesDir + "reserved_words.txt";
+
+    /// How it should be (files divided by tables)
+    const string wordPathNew = txtFilesDir + "reserved_words_new.txt";
+    const string identPathNew = txtFilesDir + "identifiers_new.txt";
+    const string divisorPathNew = txtFilesDir + "separators_new.txt";
+    const string constantsPathNew = txtFilesDir + "constants_new.txt";
+
+    /// Current test files
+    const string ConstantTableD = txtFilesDir + "constant_table_data.txt";
+    const string VariableTableD = txtFilesDir + "variable_table_data.txt";
+
+    /// output XLSX files
+    const string ConstantTableXLSX = xlsxFilesDir + "ConConstant_table.xlsx";
+    const string VariableTableXLSX = xlsxFilesDir + "VarVariable_table.xlsx";
 }
 
 /// <summary>

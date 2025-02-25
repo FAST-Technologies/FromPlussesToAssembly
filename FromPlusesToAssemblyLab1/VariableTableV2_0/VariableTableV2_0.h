@@ -18,6 +18,7 @@
 #include <limits>
 #include <sstream>
 #include <iostream>
+#include "./../Constants.h"
 
 /// <summary>
 /// [EN] Global namespaces
@@ -85,6 +86,36 @@ public:
     /// [RU] Функция для добавления лексемы в хэш-таблицу
     /// </summary>
     bool addLexeme(const string& name, LexemeType type = LexemeType::Undefined);
+
+    /// <summary>
+    /// [EN] Function for removing lexeme from hash table by lexeme name
+    /// [RU] Функция для удаления лексемы из хэш-таблицы по её имени
+    /// </summary>
+    void remove_lexeme(const string& name);
+
+    /// <summary>
+    /// [EN] Function for removing lexeme from hash table by all parameters except of lexeme name
+    /// [RU] Функция для удаления лексемы из хэш-таблицы по её параметрам за исключением имени лексемы
+    /// </summary>
+    void remove_lexeme_without_name(int lexemeCode, LexemeType lexemeType, bool initialized);
+
+    /// <summary>
+    /// [EN] Function for removing lexeme from hash table by lexeme type
+    /// [RU] Функция для удаления лексемы из хэш-таблицы по её типу
+    /// </summary>
+    void remove_lexeme_by_lexemeType(LexemeType lexemeType);
+
+    /// <summary>
+    /// [EN] Function for removing lexeme from hash table by her initialisation status
+    /// [RU] Функция для удаления лексемы из хэш-таблицы по её статусу инициализации
+    /// </summary>
+    void remove_lexeme_by_initialized_status(bool initialized);
+
+    /// <summary>
+    /// [EN] Function for removing lexeme from hash table by her lexeme code
+    /// [RU] Функция для удаления лексемы из хэш-таблицы по её коду
+    /// </summary>
+    void remove_lexeme_by_lexemeCode(int lexemeCode);
 
     /// <summary>
     /// [EN] Function for adding the attribute of lexeme to hash table
@@ -157,7 +188,7 @@ private:
     };
 
     /// Хэш-таблица
-    vector<unique_ptr<Entry>> table;  // Hash table
+    vector<unique_ptr<Entry>> table;
 
     /// <summary>
     /// [EN] Hash table capacity size
@@ -171,8 +202,11 @@ private:
     /// </summary>
     size_t size;
 
-
-    double loadFactor = 0.75;                    // Load factor for rehashing
+    /// <summary>
+    /// [EN] Coefficient of load factor for rehashing in hash table
+    /// [RU] Коэффициент загрузки хэш таблицы
+    /// </summary>
+    double loadFactor = 0.75;
 
     /// <summary>
     /// [EN] Function for counting the hash sum
@@ -180,7 +214,6 @@ private:
     /// </summary
     [[nodiscard]] size_t hash(const string& key) const;
 
-    // Rehash function (resize and redistribute elements)
     /// <summary>
     /// [EN] Function for rehashing
     /// [RU] Функция рехеширования

@@ -1,3 +1,7 @@
+/// <summary>
+/// [EN] Linked libraries and headers
+/// [RU] Подключаемые библиотеки и заголовки
+/// </summary>
 #include "VariableTableV2_0.h"
 
 /// <summary>
@@ -15,7 +19,6 @@ VariableTableV2_0::VariableTableV2_0(int initialCapacity) :
 /// </summary>
 VariableTableV2_0::~VariableTableV2_0()
 {
-    //table.clear();
     for (size_t i = 0; i < capacity; ++i) {
         if (table[i] != nullptr) {
             table[i].reset();
@@ -40,7 +43,7 @@ int VariableTableV2_0::lexemeSize(const string& typeStr, const string& symbol)
     } else if (typeStr == "Char") {
         lexemeTypeSize = sizeof(char);
     } else if (typeStr == "String") {
-        lexemeTypeSize = sizeof(string) * static_cast<int>(symbol.size());
+        lexemeTypeSize = static_cast<int>(sizeof(string) * symbol.size());
     }
     return lexemeTypeSize;
 }
@@ -61,12 +64,11 @@ bool VariableTableV2_0::loadFromFile(const string& filename)
     string typeStr;
     int lexemeCode;
     while (file >> symbol >> typeStr >> lexemeCode) {
-        // Decide whether to add as an identifier (30) or constant (40)
-
+        // identifier (30) or constant (40)
         if (typeStr == "Int" || typeStr == "Float" || typeStr == "Double") {
-            lexemeCode = 40; // Assume numeric literals are constants
+            lexemeCode = Constants::Constant;
         } else {
-            lexemeCode = 30; // Treat other as identifiers
+            lexemeCode = Constants::Identifier;
         }
         int lexemeTypeSize = lexemeSize(typeStr, symbol);
         addLexeme(symbol, typeStr, lexemeCode, lexemeTypeSize);
@@ -87,22 +89,103 @@ bool VariableTableV2_0::addLexeme(const string& name, int& lexemeCode, int& lexe
 bool VariableTableV2_0::addLexeme(const string& name, const string& typeStr, int& lexemeCode, int& lexemeTypeSize)
 {
     if (containsLexeme(name)) return false;
-    if (static_cast<double>(size) / capacity >= loadFactor) {
+    if (static_cast<double>(size) / static_cast<int>(capacity) >= loadFactor) {
         rehash();
     }
-
     size_t index = hash(name);
     size_t originalIndex = index;
     while (table[index] != nullptr) {
-        index = (index + 1) % capacity;  // Linear probing for collision resolution
-        if (index == originalIndex) return false; // Table is full
+        index = (index + 1) % capacity;
+        if (index == originalIndex) return false;
     }
-
-    LexemeType type = determineLexemeType(name); // Automatically figure out the type
-
+    LexemeType type = determineLexemeType(name);
     table[index] = make_unique<Entry>(Entry{name, {type, false, lexemeCode, lexemeTypeSize}}); // Initial attributes
     size++;
     return true;
+}
+
+/// <summary>
+/// [EN] Function for removing lexeme from hash table by lexeme name
+/// [RU] Функция для удаления лексемы из хэш-таблицы по её имени
+/// </summary>
+void VariableTableV2_0::remove_lexeme(const string& name)
+{
+    size_t index = hash(name);
+    if (table[index]) {
+        table[index].reset();
+        table[index] = nullptr;
+        size--;
+    }
+}
+
+/// <summary>
+/// [EN] Function for removing lexeme from hash table by all parameters except of lexeme name
+/// [RU] Функция для удаления лексемы из хэш-таблицы по её параметрам за исключением имени лексемы
+/// </summary>
+void VariableTableV2_0::remove_lexeme_without_name(int lexemeCode, LexemeType lexemeType, bool initialized)
+{
+    for (int i = 0; i < capacity; ++i) {
+        if (table[i]) {
+            if (table[i]->attributes.lexemeCode == lexemeCode &&
+                table[i]->attributes.type == lexemeType &&
+                table[i]->attributes.initialized == initialized) {
+                table[i].reset();
+                table[i] = nullptr;
+                size--;
+            }
+        }
+    }
+}
+
+/// <summary>
+/// [EN] Function for removing lexeme from hash table by lexeme type
+/// [RU] Функция для удаления лексемы из хэш-таблицы по её типу
+/// </summary>
+void VariableTableV2_0::remove_lexeme_by_lexemeType(LexemeType lexemeType)
+{
+    for (int i = 0; i < capacity; ++i) {
+        if (table[i]) {
+            if (table[i]->attributes.type == lexemeType) {
+                table[i].reset();
+                table[i] = nullptr;
+                size--;
+            }
+        }
+    }
+}
+
+/// <summary>
+/// [EN] Function for removing lexeme from hash table by her initialisation status
+/// [RU] Функция для удаления лексемы из хэш-таблицы по её статусу инициализации
+/// </summary>
+void VariableTableV2_0::remove_lexeme_by_initialized_status(bool initialized)
+{
+    for (int i = 0; i < capacity; ++i) {
+        if (table[i]) {
+            if (table[i]->attributes.initialized == initialized) {
+                table[i].reset();
+                table[i] = nullptr;
+                size--;
+            }
+        }
+    }
+}
+
+/// <summary>
+/// [EN] Function for removing lexeme from hash table by her lexeme code
+/// [RU] Функция для удаления лексемы из хэш-таблицы по её коду
+/// </summary>
+void VariableTableV2_0::remove_lexeme_by_lexemeCode(int lexemeCode)
+{
+    for (int i = 0; i < capacity; ++i) {
+        if (table[i]) {
+            if (table[i]->attributes.lexemeCode == lexemeCode) {
+                table[i].reset();
+                table[i] = nullptr;
+                size--;
+            }
+        }
+    }
 }
 
 /// <summary>
@@ -112,35 +195,35 @@ bool VariableTableV2_0::addLexeme(const string& name, const string& typeStr, int
 bool VariableTableV2_0::addLexeme(const string& name, LexemeType type)
 {
     int lexemeCode;
-    int lexemeTypeSize; // Default size
+    int lexemeTypeSize;
 
     switch (type) {
         case LexemeType::Int:
-            lexemeCode = 40; // Constant
-            lexemeTypeSize = sizeof(int); // Size of int
+            lexemeCode = Constants::Constant;
+            lexemeTypeSize = sizeof(int);
             break;
         case LexemeType::Float:
-            lexemeCode = 40; // Constant
-            lexemeTypeSize = sizeof(float); // Size of float
+            lexemeCode = Constants::Constant;
+            lexemeTypeSize = sizeof(float);
             break;
         case LexemeType::String:
-            lexemeCode = 30; // Identifier
-            lexemeTypeSize = sizeof(string) * static_cast<int>(name.size());
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = static_cast<int>(sizeof(string) * name.size());
             break;
         case LexemeType::Bool:
-            lexemeCode = 40; // Identifier
+            lexemeCode = Constants::Constant;
             lexemeTypeSize = sizeof(bool);
             break;
         case LexemeType::Double:
-            lexemeCode = 40; // Identifier
+            lexemeCode = Constants::Constant;
             lexemeTypeSize = sizeof(double);
             break;
         case LexemeType::Char:
-            lexemeCode = 30; // Identifier
+            lexemeCode = Constants::Identifier;
             lexemeTypeSize = sizeof(double);
             break;
         default:
-            lexemeCode = 30; // Default to Identifier for Undefined and other types
+            lexemeCode = Constants::Identifier;
             lexemeTypeSize = sizeof(bool);
             break;
     }
@@ -170,22 +253,14 @@ vector<string> VariableTableV2_0::get_all_names() const
 string VariableTableV2_0::lexemeTypeToString(LexemeType type)
 {
     switch (type) {
-        case LexemeType::Undefined:
-            return "Undefined";
-        case LexemeType::Int:
-            return "Int";
-        case LexemeType::Float:
-            return "Float";
-        case LexemeType::String:
-            return "String";
-        case LexemeType::Double:
-            return "Double";
-        case LexemeType::Bool:
-            return "Bool";
-        case LexemeType::Char:
-            return "Char";
-        default:
-            return "Unknown";
+        case LexemeType::Undefined: return "Undefined";
+        case LexemeType::Int: return "Int";
+        case LexemeType::Float: return "Float";
+        case LexemeType::String: return "String";
+        case LexemeType::Double: return "Double";
+        case LexemeType::Bool: return "Bool";
+        case LexemeType::Char: return "Char";
+        default: return "Unknown";
     }
 }
 
@@ -196,7 +271,7 @@ string VariableTableV2_0::lexemeTypeToString(LexemeType type)
 bool VariableTableV2_0::addAttribute(const string& name, LexemeAttributes attributes)
 {
     size_t index = hash(name);
-    size_t originalIndex = index; // Track starting point
+    size_t originalIndex = index;
     while (table[index] != nullptr) {
         if (table[index]->name == name) {
             table[index]->attributes = attributes;
@@ -204,7 +279,7 @@ bool VariableTableV2_0::addAttribute(const string& name, LexemeAttributes attrib
         }
         index = (index + 1) % capacity;
 
-        if (index == originalIndex) break; // Table is full
+        if (index == originalIndex) break;
     }
     return false;
 }
@@ -241,7 +316,7 @@ bool VariableTableV2_0::getAttribute(const string& name, LexemeAttributes& attri
         }
         index = (index + 1) % capacity;
 
-        if (index == originalIndex) break; // Full loop
+        if (index == originalIndex) break;
     }
     return false;
 }
@@ -250,7 +325,8 @@ bool VariableTableV2_0::getAttribute(const string& name, LexemeAttributes& attri
 /// [EN] Function for counting the hash sum
 /// [RU] Функция для подсчёта хэш-суммы
 /// </summary
-size_t VariableTableV2_0::hash(const string& key) const {
+size_t VariableTableV2_0::hash(const string& key) const
+{
     size_t hashValue = 0;
     for (char c : key) {
         hashValue = (hashValue * 31) + c;
@@ -271,14 +347,14 @@ void VariableTableV2_0::rehash() {
     // Rehash all existing elements to the new table
     for (size_t i = 0; i < oldCapacity; ++i) {
         if (table[i] != nullptr) {
-            size_t newIndex = hash(table[i]->name) % capacity; //Recalculate hash based on new capacity
+            size_t newIndex = hash(table[i]->name) % capacity;
             size_t originalNewIndex = newIndex;
 
             while (newTable[newIndex] != nullptr) {
-                newIndex = (newIndex + 1) % capacity;  // Linear probing
-                if (newIndex == originalNewIndex) break; //Table full!  This should never happen.
+                newIndex = (newIndex + 1) % capacity;
+                if (newIndex == originalNewIndex) break;
             }
-            newTable[newIndex] = std::move(table[i]);  // Move to the new table
+            newTable[newIndex] = std::move(table[i]);
         }
     }
 
@@ -298,12 +374,12 @@ bool VariableTableV2_0::set_type(const string& name, LexemeType newType)
     while (table[index] != nullptr) {
         if (table[index]->name == name) {
             table[index]->attributes.type = newType;
-            return true; // Successfully updated the type
+            return true;
         }
         index = (index + 1) % capacity;
-        if (index == originalIndex) break; // Element not found
+        if (index == originalIndex) break;
     }
-    return false; // Element not found
+    return false;
 }
 
 /// <summary>
@@ -318,12 +394,12 @@ bool VariableTableV2_0::set_init(const string& name, bool isInitialized)
     while (table[index] != nullptr) {
         if (table[index]->name == name) {
             table[index]->attributes.initialized = isInitialized;
-            return true; // Successfully updated the initialization status
+            return true;
         }
         index = (index + 1) % capacity;
-        if (index == originalIndex) break; // Element not found
+        if (index == originalIndex) break;
     }
-    return false; // Element not found
+    return false;
 }
 
 /// <summary>
@@ -338,12 +414,12 @@ bool VariableTableV2_0::set_size(const string& name, int lexemeTypeSize)
     while (table[index] != nullptr) {
         if (table[index]->name == name) {
             table[index]->attributes.lexemeTypeSize = lexemeTypeSize;
-            return true; // Successfully updated the initialization status
+            return true;
         }
         index = (index + 1) % capacity;
-        if (index == originalIndex) break; // Element not found
+        if (index == originalIndex) break;
     }
-    return false; // Element not found
+    return false;
 }
 
 
@@ -369,7 +445,7 @@ LexemeType VariableTableV2_0::determineLexemeType(const string& value)
     ss.clear();
     ss.str(value);
     if (ss >> intValue) {
-        if (ss.eof()) { // Ensure the entire string was consumed as an integer
+        if (ss.eof()) {
             return LexemeType::Int;
         }
     }
@@ -398,7 +474,6 @@ LexemeType VariableTableV2_0::determineLexemeType(const string& value)
         }
     }
 
-    // Check for float (after double, since a float can also be parsed as a double)
     ss.clear();
     ss.str(value);
     if (ss >> floatValue) {
@@ -423,30 +498,14 @@ void VariableTableV2_0::printTable() const {
             cout << "  Lexeme Code: " << table[i]->attributes.lexemeCode << endl;
             cout << "  Type: ";
             switch (table[i]->attributes.type) {
-                case LexemeType::Int:
-                    cout << "Int";
-                    break;
-                case LexemeType::Float:
-                    cout << "Float";
-                    break;
-                case LexemeType::String:
-                    cout << "String";
-                    break;
-                case LexemeType::Bool:
-                    cout << "Bool";
-                    break;
-                case LexemeType::Double:
-                    cout << "Double";
-                    break;
-                case LexemeType::Char:
-                    cout << "Char";
-                    break;
-                case LexemeType::Undefined:
-                    cout << "Undefined";
-                    break;
-                default:
-                    cout << "Unknown";
-                    break;
+                case LexemeType::Int: cout << "Int"; break;
+                case LexemeType::Float: cout << "Float"; break;
+                case LexemeType::String: cout << "String"; break;
+                case LexemeType::Bool: cout << "Bool"; break;
+                case LexemeType::Double: cout << "Double"; break;
+                case LexemeType::Char: cout << "Char"; break;
+                case LexemeType::Undefined: cout << "Undefined"; break;
+                default: cout << "Unknown"; break;
             }
             cout << endl;
             cout << "Lexeme type size: " << table[i]->attributes.lexemeTypeSize << endl;

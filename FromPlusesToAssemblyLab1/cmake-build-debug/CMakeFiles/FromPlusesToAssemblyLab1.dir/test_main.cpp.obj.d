@@ -441,4 +441,27 @@ CMakeFiles/FromPlusesToAssemblyLab1.dir/test_main.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_memory_defs.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/limits \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/sstream \
- C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/sstream.tcc
+ C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/sstream.tcc \
+ C:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/Constants.h \
+ C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\OutputModuleV2_0/OutputModuleV2_0.h \
+ C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\Constants.h \
+ C:/msys64/mingw64/include/xlsxwriter.h \
+ C:/msys64/mingw64/include/xlsxwriter/workbook.h \
+ C:/msys64/mingw64/include/xlsxwriter/worksheet.h \
+ C:/msys64/mingw64/include/xlsxwriter/shared_strings.h \
+ C:/msys64/mingw64/include/xlsxwriter/common.h \
+ C:/msys64/mingw64/include/xlsxwriter/third_party/queue.h \
+ C:/msys64/mingw64/include/xlsxwriter/third_party/tree.h \
+ C:/msys64/mingw64/include/xlsxwriter/chart.h \
+ C:/msys64/mingw64/include/xlsxwriter/format.h \
+ C:/msys64/mingw64/include/xlsxwriter/hash_table.h \
+ C:/msys64/mingw64/include/xlsxwriter/drawing.h \
+ C:/msys64/mingw64/include/xlsxwriter/styles.h \
+ C:/msys64/mingw64/include/xlsxwriter/utility.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/x86_64-w64-mingw32/include/strings.h \
+ C:/msys64/mingw64/include/xlsxwriter/xmlwriter.h \
+ C:/msys64/mingw64/include/xlsxwriter/relationships.h \
+ C:/msys64/mingw64/include/xlsxwriter/chartsheet.h \
+ C:/msys64/mingw64/include/xlsxwriter/worksheet.h \
+ C:/msys64/mingw64/include/xlsxwriter/format.h \
+ C:/msys64/mingw64/include/xlsxwriter/utility.h

@@ -1,16 +1,21 @@
-//
-// Created by Vladimir on 24.02.2025.
-//
-
 #ifndef FROMPLUSESTOASSEMBLYLAB1_OUTPUTMODULEV2_0_H
 #define FROMPLUSESTOASSEMBLYLAB1_OUTPUTMODULEV2_0_H
 
+#include "../ConstantTableV2_0/ConstantTableV2_0.h"
 
+using namespace std;
 
-class OutputModuleV2_0 {
+/// <summary>
+/// [EN] Function for installing color in console
+/// [RU] Функция для установки цвета в консоли
+/// </summary>
+void SetColor(int textColor, int bgColor);
 
-};
-
+/// <summary>
+/// [EN] Output function for constant table
+/// [RU] Функция вывода для упорядоченной таблицы
+/// </summary>
+void outputConstantTableEntry(int num, const ConstantTableEntry& entry);
 
 
 #endif //FROMPLUSESTOASSEMBLYLAB1_OUTPUTMODULEV2_0_H

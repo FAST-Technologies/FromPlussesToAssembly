@@ -1,3 +1,7 @@
+/// <summary>
+/// [EN] Linked libraries and headers
+/// [RU] Подключаемые библиотеки и заголовки
+/// </summary>
 #include "ConstantTableV2_0.h"
 
 /// <summary>
@@ -28,13 +32,11 @@ ConstantTableV2_0::~ConstantTableV2_0()
 /// </summary>
 bool ConstantTableV2_0::loadFromFile(const string& filename)
 {
-    ifstream file(filename);
+    auto file = ifstream(filename);
     if (!file.is_open()) {
         return false;
     }
-
-    string symbol;
-    string typeStr;
+    string symbol, typeStr;
     int lexemeCode;
 
     while (file >> symbol >> typeStr >> lexemeCode) {
@@ -71,18 +73,12 @@ bool ConstantTableV2_0::loadFromFile(const string& filename)
 string ConstantTableV2_0::lexemeTypeToString(LanguageElementType type)
 {
     switch (type) {
-        case LanguageElementType::Alphabet:
-            return "Alphabet";
-        case LanguageElementType::ReservedWord:
-            return "ReservedWord";
-        case LanguageElementType::OperatorSign:
-            return "OperatorSign";
-        case LanguageElementType::Delimiter:
-            return "Delimiter";
-        case LanguageElementType::Other:
-            return "Other";
-        default:
-            return "Unknown";
+        case LanguageElementType::Alphabet: return "Alphabet";
+        case LanguageElementType::ReservedWord: return "ReservedWord";
+        case LanguageElementType::OperatorSign: return "OperatorSign";
+        case LanguageElementType::Delimiter: return "Delimiter";
+        case LanguageElementType::Other: return "Other";
+        default: return "Unknown";
     }
 }
 
@@ -147,7 +143,7 @@ int ConstantTableV2_0::getLexemeCode(const string& symbol) const
 optional<ConstantTableEntry> ConstantTableV2_0::getElementAtIndex(int index) const
 {
     if (index < 0 || index >= static_cast<int>(table.size())) {
-        return std::nullopt; // Indicate that no element was found
+        return std::nullopt;
     }
     return table[index];
 }
@@ -172,19 +168,12 @@ int ConstantTableV2_0::binarySearch(const string& symbol) const
 {
     int low = 0;
     int high = static_cast<int>(table.size() - 1);
-
     while (low <= high) {
         int mid = low + (high - low) / 2;
-
-        if (table[mid].symbol == symbol) {
-            return mid;
-        } else if (table[mid].symbol < symbol) {
-            low = mid + 1;
-        } else {
-            high = mid - 1;
-        }
+        if (table[mid].symbol == symbol) return mid;
+        else if (table[mid].symbol < symbol) low = mid + 1;
+        else high = mid - 1;
     }
-
     return -1;
 }
 

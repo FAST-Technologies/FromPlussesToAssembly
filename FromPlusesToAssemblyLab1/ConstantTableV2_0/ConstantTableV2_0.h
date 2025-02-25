@@ -54,7 +54,6 @@ struct ConstantTableEntry {
     bool operator<(const ConstantTableEntry& other) const {
         return symbol < other.symbol;
     }
-
     /// Булевый оператор присваивания для поиска-сортировки
     bool operator == (const ConstantTableEntry& other) const {
         return symbol == other.symbol;

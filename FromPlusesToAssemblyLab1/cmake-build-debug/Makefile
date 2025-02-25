@@ -152,29 +152,29 @@ ConstantTableV2_0/ConstantTableV2_0.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\FromPlusesToAssemblyLab1.dir\build.make CMakeFiles/FromPlusesToAssemblyLab1.dir/ConstantTableV2_0/ConstantTableV2_0.cpp.s
 .PHONY : ConstantTableV2_0/ConstantTableV2_0.cpp.s
 
-LexemeV2_0/LexemeV2_0.obj: LexemeV2_0/LexemeV2_0.cpp.obj
-.PHONY : LexemeV2_0/LexemeV2_0.obj
+OutputModuleV2_0/OutputModuleV2_0.obj: OutputModuleV2_0/OutputModuleV2_0.cpp.obj
+.PHONY : OutputModuleV2_0/OutputModuleV2_0.obj
 
 # target to build an object file
-LexemeV2_0/LexemeV2_0.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FromPlusesToAssemblyLab1.dir\build.make CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.obj
-.PHONY : LexemeV2_0/LexemeV2_0.cpp.obj
+OutputModuleV2_0/OutputModuleV2_0.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\FromPlusesToAssemblyLab1.dir\build.make CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.obj
+.PHONY : OutputModuleV2_0/OutputModuleV2_0.cpp.obj
 
-LexemeV2_0/LexemeV2_0.i: LexemeV2_0/LexemeV2_0.cpp.i
-.PHONY : LexemeV2_0/LexemeV2_0.i
+OutputModuleV2_0/OutputModuleV2_0.i: OutputModuleV2_0/OutputModuleV2_0.cpp.i
+.PHONY : OutputModuleV2_0/OutputModuleV2_0.i
 
 # target to preprocess a source file
-LexemeV2_0/LexemeV2_0.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FromPlusesToAssemblyLab1.dir\build.make CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.i
-.PHONY : LexemeV2_0/LexemeV2_0.cpp.i
+OutputModuleV2_0/OutputModuleV2_0.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\FromPlusesToAssemblyLab1.dir\build.make CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.i
+.PHONY : OutputModuleV2_0/OutputModuleV2_0.cpp.i
 
-LexemeV2_0/LexemeV2_0.s: LexemeV2_0/LexemeV2_0.cpp.s
-.PHONY : LexemeV2_0/LexemeV2_0.s
+OutputModuleV2_0/OutputModuleV2_0.s: OutputModuleV2_0/OutputModuleV2_0.cpp.s
+.PHONY : OutputModuleV2_0/OutputModuleV2_0.s
 
 # target to generate assembly for a file
-LexemeV2_0/LexemeV2_0.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FromPlusesToAssemblyLab1.dir\build.make CMakeFiles/FromPlusesToAssemblyLab1.dir/LexemeV2_0/LexemeV2_0.cpp.s
-.PHONY : LexemeV2_0/LexemeV2_0.cpp.s
+OutputModuleV2_0/OutputModuleV2_0.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\FromPlusesToAssemblyLab1.dir\build.make CMakeFiles/FromPlusesToAssemblyLab1.dir/OutputModuleV2_0/OutputModuleV2_0.cpp.s
+.PHONY : OutputModuleV2_0/OutputModuleV2_0.cpp.s
 
 VariableTableV2_0/VariableTableV2_0.obj: VariableTableV2_0/VariableTableV2_0.cpp.obj
 .PHONY : VariableTableV2_0/VariableTableV2_0.obj
@@ -236,9 +236,9 @@ help:
 	@echo ... ConstantTableV2_0/ConstantTableV2_0.obj
 	@echo ... ConstantTableV2_0/ConstantTableV2_0.i
 	@echo ... ConstantTableV2_0/ConstantTableV2_0.s
-	@echo ... LexemeV2_0/LexemeV2_0.obj
-	@echo ... LexemeV2_0/LexemeV2_0.i
-	@echo ... LexemeV2_0/LexemeV2_0.s
+	@echo ... OutputModuleV2_0/OutputModuleV2_0.obj
+	@echo ... OutputModuleV2_0/OutputModuleV2_0.i
+	@echo ... OutputModuleV2_0/OutputModuleV2_0.s
 	@echo ... VariableTableV2_0/VariableTableV2_0.obj
 	@echo ... VariableTableV2_0/VariableTableV2_0.i
 	@echo ... VariableTableV2_0/VariableTableV2_0.s
