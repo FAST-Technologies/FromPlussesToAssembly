@@ -70,7 +70,7 @@ public:
     /// [EN] Constructor for ConstantTableV2_0 class
     /// [RU] Конструктор класса ConstantTableV2_0
     /// </summary>
-    explicit ConstantTableV2_0(const string& filename);
+    explicit ConstantTableV2_0(const string& filename, ofstream& logger);
 
     /// <summary>
     /// [EN] Destructor for ConstantTableV2_0 class
@@ -88,7 +88,7 @@ public:
     /// [EN] Function for adding element to constant table
     /// [RU] Функция добавления элемента в упорядоченную таблицу
     /// </summary>
-    bool add(const string& symbol, LanguageElementType type, int lexemeCode, int lexemeTypeSize);
+    bool add(const string& symbol, LanguageElementType type, int lexemeCode, int lexemeTypeSize, ofstream& logger);
 
     /// <summary>
     /// [EN] String function that gets a type of element from constant table
@@ -155,7 +155,7 @@ private:
     /// [EN] Bool function of getting constant table from file
     /// [RU] Булева функция получения таблицы из файла
     /// </summary>
-    bool loadFromFile(const string& filename);
+    bool loadFromFile(const string& filename, ofstream& logger);
 };
 
 #endif //FROMPLUSESTOASSEMBLYLAB1_CONSTANTTABLEV2_0_H

@@ -8,9 +8,9 @@
 /// [EN] Constructor for ConstantTableV2_0 class
 /// [RU] Конструктор класса ConstantTableV2_0
 /// </summary>
-ConstantTableV2_0::ConstantTableV2_0(const string& filename)
+ConstantTableV2_0::ConstantTableV2_0(const string& filename, ofstream& logger)
 {
-    if (!loadFromFile(filename)) {
+    if (!loadFromFile(filename, logger)) {
         cerr << "Error loading constant table from file: " << filename << endl;
         throw runtime_error("Error loading constant table from file: " + filename);
     }
@@ -30,7 +30,7 @@ ConstantTableV2_0::~ConstantTableV2_0()
 /// [EN] Bool function of getting constant table from file
 /// [RU] Булева функция получения таблицы из файла
 /// </summary>
-bool ConstantTableV2_0::loadFromFile(const string& filename)
+bool ConstantTableV2_0::loadFromFile(const string& filename, ofstream& logger)
 {
     auto file = ifstream(filename);
     if (!file.is_open()) {
@@ -53,7 +53,7 @@ bool ConstantTableV2_0::loadFromFile(const string& filename)
                 (symbolSize == 1 ?
                 static_cast<int>(sizeof(char)) :
                 static_cast<int>(sizeof(string) * symbolSize));
-        add(symbol, type, lexemeCode, lexemeTypeSize);
+        add(symbol, type, lexemeCode, lexemeTypeSize, logger);
     }
 
     if (file.bad()) {
@@ -86,10 +86,10 @@ string ConstantTableV2_0::lexemeTypeToString(LanguageElementType type)
 /// [EN] Function for adding element to constant table
 /// [RU] Функция добавления элемента в упорядоченную таблицу
 /// </summary>
-bool ConstantTableV2_0::add(const string& symbol, LanguageElementType type, int lexemeCode, int lexemeTypeSize)
+bool ConstantTableV2_0::add(const string& symbol, LanguageElementType type, int lexemeCode, int lexemeTypeSize, ofstream& logger)
 {
     if (contains(symbol)) {
-        cerr << "The current element is already in the table! "  << symbol << endl;
+        logger << "Error: The current element is already in the table! "  << symbol << endl;
         return false;
     }
     table.push_back({symbol, type, lexemeCode, lexemeTypeSize});

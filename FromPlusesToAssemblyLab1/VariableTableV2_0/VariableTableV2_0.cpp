@@ -64,7 +64,6 @@ bool VariableTableV2_0::loadFromFile(const string& filename)
     string typeStr;
     int lexemeCode;
     while (file >> symbol >> typeStr >> lexemeCode) {
-        // identifier (30) or constant (40)
         if (typeStr == "Int" || typeStr == "Float" || typeStr == "Double") {
             lexemeCode = Constants::Constant;
         } else {
@@ -232,7 +231,7 @@ bool VariableTableV2_0::addLexeme(const string& name, LexemeType type)
 }
 
 /// <summary>
-/// [EN] Function that ables to get all names of variables
+/// [EN] Function that able to get all names of variables
 /// [RU] Функция, которая позволяет получать все имена переменных
 /// </summary>
 vector<string> VariableTableV2_0::get_all_names() const
@@ -295,7 +294,6 @@ bool VariableTableV2_0::containsLexeme(const string& name) const
     while (table[index] != nullptr) {
         if (table[index]->name == name) return true;
         index = (index + 1) % capacity;
-
         if (index == originalIndex) break;
     }
     return false;
@@ -344,7 +342,6 @@ void VariableTableV2_0::rehash() {
     size_t oldCapacity = capacity;
     capacity = newCapacity;
 
-    // Rehash all existing elements to the new table
     for (size_t i = 0; i < oldCapacity; ++i) {
         if (table[i] != nullptr) {
             size_t newIndex = hash(table[i]->name) % capacity;
@@ -422,6 +419,26 @@ bool VariableTableV2_0::set_size(const string& name, int lexemeTypeSize)
     return false;
 }
 
+/// <summary>
+/// [EN] Function that sets different code for variable
+/// [RU] Функция, устанавливающая другой код лексемы
+/// </summary>
+bool VariableTableV2_0::set_code(const string& name, int lexemeCode)
+{
+    size_t index = hash(name);
+    size_t originalIndex = index;
+
+    while (table[index] != nullptr) {
+        if (table[index]->name == name) {
+            table[index]->attributes.lexemeCode = lexemeCode;
+            return true;
+        }
+        index = (index + 1) % capacity;
+        if (index == originalIndex) break;
+    }
+    return false;
+}
+
 
 /// <summary>
 /// [EN] Helper function to determine LexemeType
@@ -489,28 +506,28 @@ LexemeType VariableTableV2_0::determineLexemeType(const string& value)
 /// [EN] Function that prints the hash table
 /// [RU] Функция для вывода данных хэш-таблицы
 /// </summary>
-void VariableTableV2_0::printTable() const {
-    cout << "Variable Table Contents:" << endl;
+void VariableTableV2_0::printTable(ofstream& logger) const {
+    logger << "Variable Table Contents:" << endl;
     for (size_t i = 0; i < capacity; ++i) {
         if (table[i] != nullptr) {
-            cout << "Index: " << i << endl;
-            cout << "  Name: " << table[i]->name << endl;
-            cout << "  Lexeme Code: " << table[i]->attributes.lexemeCode << endl;
-            cout << "  Type: ";
+            logger << "Index: " << i << endl;
+            logger << "  Name: " << table[i]->name << endl;
+            logger << "  Lexeme Code: " << table[i]->attributes.lexemeCode << endl;
+            logger << "  Type: ";
             switch (table[i]->attributes.type) {
-                case LexemeType::Int: cout << "Int"; break;
-                case LexemeType::Float: cout << "Float"; break;
-                case LexemeType::String: cout << "String"; break;
-                case LexemeType::Bool: cout << "Bool"; break;
-                case LexemeType::Double: cout << "Double"; break;
-                case LexemeType::Char: cout << "Char"; break;
-                case LexemeType::Undefined: cout << "Undefined"; break;
-                default: cout << "Unknown"; break;
+                case LexemeType::Int: logger << "Int"; break;
+                case LexemeType::Float: logger << "Float"; break;
+                case LexemeType::String: logger << "String"; break;
+                case LexemeType::Bool: logger << "Bool"; break;
+                case LexemeType::Double: logger << "Double"; break;
+                case LexemeType::Char: logger << "Char"; break;
+                case LexemeType::Undefined: logger << "Undefined"; break;
+                default: logger << "Unknown"; break;
             }
-            cout << endl;
-            cout << "Lexeme type size: " << table[i]->attributes.lexemeTypeSize << endl;
-            cout << "  Initialized: " << (table[i]->attributes.initialized ? "Yes" : "No") << endl;
-            cout << "----------------------" << endl;
+            logger << endl;
+            logger << "Lexeme type size: " << table[i]->attributes.lexemeTypeSize << endl;
+            logger << "  Initialized: " << (table[i]->attributes.initialized ? "Yes" : "No") << endl;
+            logger << "----------------------" << endl;
         }
     }
 }

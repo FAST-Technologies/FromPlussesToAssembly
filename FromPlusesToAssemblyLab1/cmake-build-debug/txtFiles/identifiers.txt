@@ -1,0 +1,3 @@
+a Char 30
+b Char 30
+ab String 30

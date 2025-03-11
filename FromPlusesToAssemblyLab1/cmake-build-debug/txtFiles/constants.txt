@@ -1,7 +1,4 @@
-a Char 30
-b Char 30
 7 Int 40
 3.14 Float 40
-ab String 30
 6.234856756 Double 40
 fi Int 40

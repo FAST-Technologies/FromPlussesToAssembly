@@ -1,5 +1,4 @@
 #include "OutputModuleV2_0.h"
-#include <sstream>
 
 /// <summary>
 /// [EN] Function for installing color in console
@@ -15,7 +14,7 @@ void SetColor(int textColor, int bgColor)
 /// [EN] Output function for constant table
 /// [RU] Функция вывода для упорядоченной таблицы
 /// </summary>
-void outputConstantTableEntry(int num, const ConstantTableEntry& entry)
+void outputConstantTableEntry(int num, const ConstantTableEntry& entry, ofstream& logger)
 {
     stringstream output;
     output << num << " : ";
@@ -41,5 +40,15 @@ void outputConstantTableEntry(int num, const ConstantTableEntry& entry)
     } else {
         output << "string)";
     }
-    cout << output.str() << endl;
+    string message = output.str();
+    logger << message << endl;
+}
+
+/// <summary>
+/// [EN] Help function to check dot
+/// [RU] Вспомогательная функция проверки на точку
+/// </summary>
+bool containsDot(const string& text)
+{
+    return text.find('.') != string::npos;
 }

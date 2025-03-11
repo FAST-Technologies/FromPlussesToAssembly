@@ -2,6 +2,7 @@
 #define FROMPLUSESTOASSEMBLYLAB1_OUTPUTMODULEV2_0_H
 
 #include "../ConstantTableV2_0/ConstantTableV2_0.h"
+#include <sstream>
 
 using namespace std;
 
@@ -15,7 +16,13 @@ void SetColor(int textColor, int bgColor);
 /// [EN] Output function for constant table
 /// [RU] Функция вывода для упорядоченной таблицы
 /// </summary>
-void outputConstantTableEntry(int num, const ConstantTableEntry& entry);
+void outputConstantTableEntry(int num, const ConstantTableEntry& entry, ofstream& logger);
+
+/// <summary>
+/// [EN] Help function to check dot
+/// [RU] Вспомогательная функция проверки на точку
+/// </summary>
+bool containsDot(const string& text);
 
 
 #endif //FROMPLUSESTOASSEMBLYLAB1_OUTPUTMODULEV2_0_H

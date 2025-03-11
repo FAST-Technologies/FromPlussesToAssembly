@@ -1,0 +1,360 @@
+Contains '7': 1
+Contains 'nonExistent': 0
+Variable Table Contents:
+Index: 0
+  Name: 2.80
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 1
+  Name: 2.81
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 2
+  Name: 2.82
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 3
+  Name: 2.65
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 4
+  Name: 2.84
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 5
+  Name: 2.85
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 6
+  Name: 2.86
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 7
+  Name: -7.1
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 8
+  Name: 3.86745635
+  Lexeme Code: 40
+  Type: Double
+Lexeme type size: 8
+  Initialized: No
+----------------------
+Index: 9
+  Name: 2.87
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 10
+  Name: 2.88
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 11
+  Name: 2.89
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 12
+  Name: 2.83
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 15
+  Name: 7
+  Lexeme Code: 40
+  Type: Int
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Variable Table Contents:
+Index: 0
+  Name: 2.80
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 1
+  Name: 2.81
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 2
+  Name: 2.82
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 3
+  Name: 2.65
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 4
+  Name: 2.84
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 5
+  Name: 2.85
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 6
+  Name: 2.86
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 7
+  Name: -7.1
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 8
+  Name: 3.86745635
+  Lexeme Code: 40
+  Type: Double
+Lexeme type size: 8
+  Initialized: No
+----------------------
+Index: 9
+  Name: 2.87
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 10
+  Name: 2.88
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 11
+  Name: 2.89
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 12
+  Name: 2.83
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 13
+  Name: 23
+  Lexeme Code: 40
+  Type: Int
+Lexeme type size: 1
+  Initialized: No
+----------------------
+Index: 15
+  Name: 7
+  Lexeme Code: 40
+  Type: Int
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Successfully added attributes to '23'.
+Variable Table Contents:
+Index: 0
+  Name: 2.80
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 1
+  Name: 2.81
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 2
+  Name: 2.82
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 3
+  Name: 2.65
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 4
+  Name: 2.84
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 5
+  Name: 2.85
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 6
+  Name: 2.86
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 7
+  Name: -7.1
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 8
+  Name: 3.86745635
+  Lexeme Code: 40
+  Type: Double
+Lexeme type size: 8
+  Initialized: No
+----------------------
+Index: 9
+  Name: 2.87
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 10
+  Name: 2.88
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 11
+  Name: 2.89
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 12
+  Name: 2.83
+  Lexeme Code: 40
+  Type: Float
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Index: 13
+  Name: 23
+  Lexeme Code: 40
+  Type: Int
+Lexeme type size: 4
+  Initialized: Yes
+----------------------
+Index: 15
+  Name: 7
+  Lexeme Code: 40
+  Type: Int
+Lexeme type size: 4
+  Initialized: No
+----------------------
+All data was successfully removed
+Variable Table Contents:
+Index: 8
+  Name: 3.86745635
+  Lexeme Code: 40
+  Type: Double
+Lexeme type size: 8
+  Initialized: No
+----------------------
+Index: 13
+  Name: 23
+  Lexeme Code: 40
+  Type: Int
+Lexeme type size: 4
+  Initialized: Yes
+----------------------
+Index: 15
+  Name: 7
+  Lexeme Code: 40
+  Type: Int
+Lexeme type size: 4
+  Initialized: No
+----------------------
+Failed to retrieve attributes for 'nonExistingVar' (not found).
+Variable Table Contents:
+Index: 8
+  Name: 3.86745635
+  Lexeme Code: 40
+  Type: Double
+Lexeme type size: 8
+  Initialized: No
+----------------------
+Index: 13
+  Name: 23
+  Lexeme Code: 40
+  Type: Int
+Lexeme type size: 4
+  Initialized: Yes
+----------------------
+Index: 15
+  Name: 7
+  Lexeme Code: 40
+  Type: Int
+Lexeme type size: 4
+  Initialized: No
+----------------------

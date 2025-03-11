@@ -26,22 +26,25 @@ namespace GlobalPaths {
     /// Paths to files (txt && xlsx)
     const string txtFilesDir = "./txtFiles/";
     const string xlsxFilesDir = "./xlsxFiles/";
-    /// First attempt file
-    const string wordsPath = txtFilesDir + "reserved_words.txt";
-
-    /// How it should be (files divided by tables)
-    const string wordPathNew = txtFilesDir + "reserved_words_new.txt";
-    const string identPathNew = txtFilesDir + "identifiers_new.txt";
-    const string divisorPathNew = txtFilesDir + "separators_new.txt";
-    const string constantsPathNew = txtFilesDir + "constants_new.txt";
+    const string logFilesDir = "./logFiles/";
 
     /// Current test files
-    const string ConstantTableD = txtFilesDir + "constant_table_data.txt";
-    const string VariableTableD = txtFilesDir + "variable_table_data.txt";
+    const string KeyWordsTable = txtFilesDir + "key_words.txt";
+    const string SeparatorsTable = txtFilesDir + "separators.txt";
+    const string IdentifiersTable = txtFilesDir + "identifiers.txt";
+    const string ConstantsTable = txtFilesDir + "constants.txt";
 
-    /// output XLSX files
-    const string ConstantTableXLSX = xlsxFilesDir + "ConConstant_table.xlsx";
-    const string VariableTableXLSX = xlsxFilesDir + "VarVariable_table.xlsx";
+    /// Output XLSX files
+    const string KeyWordsTableXLSX = xlsxFilesDir + "Key_words.xlsx";
+    const string SeparatorsTableXLSX = xlsxFilesDir + "Separators.xlsx";
+    const string IdentifiersTableXLSX = xlsxFilesDir + "Identifiers.xlsx";
+    const string ConstantsTableXLSX = xlsxFilesDir + "Constants.xlsx";
+
+    /// Output logs files
+    const string KeyWordsLogFile = logFilesDir + "KeyWordsOutput.log";
+    const string SeparatorsLogFile = logFilesDir + "SeparatorsOutput.log";
+    const string IdentifiersLogFile = logFilesDir + "IdentifiersOutput.log";
+    const string ConstantsLogFile = logFilesDir + "ConstantsOutput.log";
 }
 
 /// <summary>

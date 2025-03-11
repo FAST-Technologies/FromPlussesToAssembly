@@ -139,7 +139,7 @@ public:
     /// [EN] Function that prints the hash table
     /// [RU] Функция для вывода данных хэш-таблицы
     /// </summary>
-    void printTable() const;
+    void printTable(ofstream& logger) const;
 
     /// <summary>
     /// [EN] Function that transform the lexeme type to string
@@ -170,6 +170,9 @@ public:
     /// [RU] Функция, устанавливающая другой размер лексемы
     /// </summary>
     bool set_size(const string& name, int lexemeTypeSize);
+
+
+    bool set_code(const string& name, int lexemeCode);
 
     /// <summary>
     /// [EN] Function that ables to get all names of variables
