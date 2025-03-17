@@ -27,6 +27,7 @@ namespace GlobalPaths {
     const string txtFilesDir = "./txtFiles/";
     const string xlsxFilesDir = "./xlsxFiles/";
     const string logFilesDir = "./logFiles/";
+    const string outputDir = "./outputFiles/";
 
     /// Current test files
     const string KeyWordsTable = txtFilesDir + "key_words.txt";
@@ -45,6 +46,8 @@ namespace GlobalPaths {
     const string SeparatorsLogFile = logFilesDir + "SeparatorsOutput.log";
     const string IdentifiersLogFile = logFilesDir + "IdentifiersOutput.log";
     const string ConstantsLogFile = logFilesDir + "ConstantsOutput.log";
+
+    const string TokenFile = outputDir + "tokens.txt";
 }
 
 /// <summary>
@@ -57,5 +60,11 @@ typedef enum Constants {
     Identifier = 30,
     Constant = 40
 } Constants;
+
+struct Token {
+    int type;
+    int tableIndex;
+    int hashIndex;
+};
 
 #endif //FROMPLUSESTOASSEMBLYLAB1_CONSTANTS_H

@@ -7,6 +7,7 @@
 #include "OutputModuleV2_0/OutputModuleV2_0.h"
 #include "SymbolTableV2_0.h"
 #include "Constants.h"
+#include "Scanner/Scanner.h"
 
 /// Library for work with xlsx files under C++
 #include <xlsxwriter.h>
@@ -20,7 +21,7 @@ int main()
     /// Использование лямбда - функции
     auto hello { [](){ cout << "Welcome to first Assembly lab V2_0!" << endl; } };
     hello();
-
+    cout << "Well" << endl;
     const char* cKeyWordsTableXLSX = GlobalPaths::KeyWordsTableXLSX.c_str();
     const char* cIdentifiersTableXLSX = GlobalPaths::IdentifiersTableXLSX.c_str();
     const char* cSeparatorsTableXLSX = GlobalPaths::SeparatorsTableXLSX.c_str();
@@ -174,10 +175,33 @@ int main()
         IdentifiersInit.addLexeme("myVariable", LexemeType::Int);
         ConstantsInit.addLexeme("-7.1", LexemeType::Float);
         IdentifiersInit.addLexeme("Who", LexemeType::Undefined);
+        IdentifiersInit.addLexeme("Who", LexemeType::Undefined);
+        IdentifiersLogger << "  Ahoo: ";
+        LexemeAttributes retrievedAttributes;
+        if (IdentifiersInit.getAttribute("Who", retrievedAttributes)) {
+            IdentifiersLogger << "Successfully retrieved attributes for 'Who'." << endl;
+            IdentifiersLogger << "  Type: ";
+            string typed = VariableTableV2_0::lexemeTypeToString(retrievedAttributes.type);
+            IdentifiersLogger << typed << endl;
+            IdentifiersLogger << "  Initialized: " << retrievedAttributes.initialized << endl;
+            IdentifiersLogger << "  Lexeme Code: " << retrievedAttributes.lexemeCode << endl;
+            IdentifiersLogger << "  Lexeme Type Size: " << retrievedAttributes.lexemeTypeSize << endl;
+
+            vector<string> names1 = IdentifiersInit.get_all_names();
+
+            IdentifiersInit.remove_lexeme("myVariable");
+            IdentifiersLogger << "myVariable was successfully removed" << endl;
+
+            IdentifiersInit.printTable(IdentifiersLogger);
+
+        } else {
+            IdentifiersLogger << "Failed to retrieve attributes for 'Who' (not found)." << endl;
+        }
         ConstantsInit.addLexeme("3.86745635", LexemeType::Double);
         IdentifiersInit.addLexeme("a", LexemeType::Char);
         IdentifiersInit.addLexeme("true", LexemeType::Bool);
         IdentifiersInit.addLexeme("ased", LexemeType::String);
+        ConstantsInit.addLexeme("2.65", LexemeType::Float);
         ConstantsInit.addLexeme("2.65", LexemeType::Float);
         ConstantsInit.addLexeme("2.87", LexemeType::Float);
         ConstantsInit.addLexeme("2.88", LexemeType::Float);
@@ -329,28 +353,9 @@ int main()
         workbook_close(workbookV2);
         cout << "Successfully wrote data to " + GlobalPaths::ConstantsTableXLSX << endl;
 
-        LexemeAttributes retrievedAttributes;
-        if (IdentifiersInit.getAttribute("Who", retrievedAttributes)) {
-            IdentifiersLogger << "Successfully retrieved attributes for 'Who'." << endl;
-            IdentifiersLogger << "  Type: ";
-            string typed = VariableTableV2_0::lexemeTypeToString(retrievedAttributes.type);
-            IdentifiersLogger << typed << endl;
-            IdentifiersLogger << "  Initialized: " << retrievedAttributes.initialized << endl;
-            IdentifiersLogger << "  Lexeme Code: " << retrievedAttributes.lexemeCode << endl;
-            IdentifiersLogger << "  Lexeme Type Size: " << retrievedAttributes.lexemeTypeSize << endl;
 
-            vector<string> names1 = IdentifiersInit.get_all_names();
 
-            IdentifiersInit.remove_lexeme("myVariable");
-            IdentifiersLogger << "myVariable was successfully removed" << endl;
-
-            IdentifiersInit.printTable(IdentifiersLogger);
-
-        } else {
-            IdentifiersLogger << "Failed to retrieve attributes for 'Who' (not found)." << endl;
-        }
-
-        ConstantsInit.remove_lexeme_without_name(Constant, LexemeType::Float, false);
+        //ConstantsInit.remove_lexeme_without_name(Constant, LexemeType::Float, false);
 
         ConstantsLogger << "All data was successfully removed" << endl;
         ConstantsInit.printTable(ConstantsLogger);
@@ -370,5 +375,13 @@ int main()
         cerr << "Exception during Variable Table testing: " << e.what() << endl;
         throw e;
     }
+
+//    /// Trying to make working scanner
+//    Scanner scanner(KeyWordsInit, SeparatorsInit, IdentifiersInit, ConstantsInit);
+//    string code = "int foo(int x) = x + 5; bool flag = true ^ false; return foo;";
+//    cout << "Processing code: " << code << endl << endl;
+//    scanner.processCode(code);
+//    cout << "\nTable contents after processing:" << endl;
+//    scanner.printTableContents(IdentifiersLogger);
     return 0;
 }

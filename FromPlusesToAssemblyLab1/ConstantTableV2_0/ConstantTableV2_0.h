@@ -147,6 +147,7 @@ public:
     [[nodiscard]] auto begin() const { return table.begin(); }
     [[nodiscard]] auto end() const { return table.end(); }
 
+    int size() override;
 private:
     /// Вектор структур упорядоченных таблиц
     vector<ConstantTableEntry> table;

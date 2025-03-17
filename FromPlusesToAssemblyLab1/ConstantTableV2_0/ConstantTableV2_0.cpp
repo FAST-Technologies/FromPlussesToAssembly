@@ -26,6 +26,8 @@ ConstantTableV2_0::~ConstantTableV2_0()
     cout << "Object ConstantTable is deleted" << endl;
 }
 
+int ConstantTableV2_0::size()  { return table.size(); }
+
 /// <summary>
 /// [EN] Bool function of getting constant table from file
 /// [RU] Булева функция получения таблицы из файла
@@ -34,6 +36,7 @@ bool ConstantTableV2_0::loadFromFile(const string& filename, ofstream& logger)
 {
     auto file = ifstream(filename);
     if (!file.is_open()) {
+        cerr << "Warning: Could not open file " << filename << endl;
         return false;
     }
     string symbol, typeStr;

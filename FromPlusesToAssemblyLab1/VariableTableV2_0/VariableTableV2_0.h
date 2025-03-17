@@ -19,6 +19,7 @@
 #include <sstream>
 #include <iostream>
 #include "./../Constants.h"
+#include "../SymbolTableV2_0.h"
 
 /// <summary>
 /// [EN] Global namespaces
@@ -180,6 +181,13 @@ public:
     /// </summary>
     [[nodiscard]] vector<string> get_all_names() const;
 
+
+/// <summary>
+/// [EN] Function for counting the hash sum
+/// [RU] Функция для подсчёта хэш-суммы
+/// </summary
+[[nodiscard]] size_t hash(const string& key) const;
+
 private:
     /// <summary>
     /// [EN] Hash table structure: variable name and attributes
@@ -210,12 +218,6 @@ private:
     /// [RU] Коэффициент загрузки хэш таблицы
     /// </summary>
     double loadFactor = 0.75;
-
-    /// <summary>
-    /// [EN] Function for counting the hash sum
-    /// [RU] Функция для подсчёта хэш-суммы
-    /// </summary
-    [[nodiscard]] size_t hash(const string& key) const;
 
     /// <summary>
     /// [EN] Function for rehashing

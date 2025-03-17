@@ -55,6 +55,8 @@ public:
     /// [RU] Виртуальная целочисленная функция получения кода лексемы элемента в таблице
     /// </summary>
     virtual int getLexemeCode(const string& symbol) const = 0;
+
+    virtual int size() = 0;
 };
 
 #endif //FROMPLUSESTOASSEMBLYLAB1_SYMBOLTABLEV2_0_H
