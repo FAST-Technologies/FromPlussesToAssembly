@@ -1,0 +1,77 @@
+  Ahoo: Successfully retrieved attributes for 'Who'.
+  Type: String
+  Initialized: 0
+  Lexeme Code: 30
+  Lexeme Type Size: 1
+myVariable was successfully removed
+Variable Table Contents:
+Index: 2
+  Name: Who
+  Lexeme Code: 30
+  Type: String
+Lexeme type size: 1
+  Initialized: No
+----------------------
+Contains 'myVariable': 0
+Contains 'Who': 1
+Changing types for identifiers: 
+Variable Table Contents:
+Index: 2
+  Name: Who
+  Lexeme Code: 30
+  Type: String
+Lexeme type size: 96
+  Initialized: No
+----------------------
+Index: 3
+  Name: ased
+  Lexeme Code: 30
+  Type: String
+Lexeme type size: 128
+  Initialized: No
+----------------------
+Index: 7
+  Name: a
+  Lexeme Code: 30
+  Type: Char
+Lexeme type size: 8
+  Initialized: No
+----------------------
+Index: 8
+  Name: true
+  Lexeme Code: 30
+  Type: String
+Lexeme type size: 128
+  Initialized: No
+----------------------
+Successfully changed 'Who' to Double.
+Failed to initialize 'ab' (not found).
+Variable Table Contents:
+Index: 2
+  Name: Who
+  Lexeme Code: 30
+  Type: Double
+Lexeme type size: 96
+  Initialized: No
+----------------------
+Index: 3
+  Name: ased
+  Lexeme Code: 30
+  Type: String
+Lexeme type size: 128
+  Initialized: No
+----------------------
+Index: 7
+  Name: a
+  Lexeme Code: 30
+  Type: Char
+Lexeme type size: 8
+  Initialized: No
+----------------------
+Index: 8
+  Name: true
+  Lexeme Code: 30
+  Type: String
+Lexeme type size: 128
+  Initialized: No
+----------------------

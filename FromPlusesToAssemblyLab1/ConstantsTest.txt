@@ -1,0 +1,134 @@
+        auto KeyWordsLogger = ofstream(GlobalPaths::KeyWordsLogFile);
+        auto SeparatorsLogger = ofstream(GlobalPaths::SeparatorsLogFile);
+        if (!KeyWordsLogger.is_open()) {
+            cerr << "Can not open " + GlobalPaths::KeyWordsLogFile + " for writing logs!" << endl;
+            return 1;
+        }
+        if (!SeparatorsLogger.is_open()) {
+            cerr << "Can not open " + GlobalPaths::SeparatorsLogFile + " for writing logs!" << endl;
+            return 1;
+        }
+        ConstantTableV2_0 KeyWordsInit(GlobalPaths::KeyWordsTable, KeyWordsLogger);
+        KeyWordsLogger << "Key Words Table Contents: " << endl;
+        vector<ConstantTableEntry> KeyWordsTable = KeyWordsInit.getTable();
+        int key_index = 0;
+        for (const auto& entry : KeyWordsTable) {
+            key_index += 1;
+            outputConstantTableEntry(key_index, entry, KeyWordsLogger);
+        }
+
+        lxw_workbook* workbookC1 = workbook_new(cKeyWordsTableXLSX);
+        if (!workbookC1) {
+            cerr << "Error creating workbook with name " + GlobalPaths::KeyWordsTableXLSX << endl;
+            return 1;
+        }
+
+        lxw_worksheet* worksheetKeyWord = workbook_add_worksheet(workbookC1, "Key Words Data");
+        if (!worksheetKeyWord) {
+            cerr << "Error creating worksheet!" << endl;
+            workbook_close(workbookC1);
+            lxw_workbook_free(workbookC1);
+            return 1;
+        }
+
+        worksheet_write_string(worksheetKeyWord, 0, 0, "№", nullptr);
+        worksheet_write_string(worksheetKeyWord, 0, 1, "Key Word", nullptr);
+        //worksheet_write_string(worksheetKeyWord, 0, 1, "Type", nullptr);
+        worksheet_write_string(worksheetKeyWord, 0, 2, "Lexeme Code", nullptr);
+        //worksheet_write_string(worksheetKeyWord, 0, 3, "Lexeme Type Size", nullptr);
+
+        int KeyWordRow = 1;
+        int KeyWordIndex = 0;
+        for (const auto& entry : KeyWordsTable) {
+            if (entry.lexemeCode == KeyWord) {
+                worksheet_write_number(worksheetKeyWord, KeyWordRow, 0, KeyWordIndex++, nullptr);
+                worksheet_write_string(worksheetKeyWord, KeyWordRow, 1, entry.symbol.c_str(), nullptr);
+                //string typeString = ConstantTableV2_0::lexemeTypeToString(entry.type);
+                //worksheet_write_string(worksheetKeyWord, row, 1, typeString.c_str(), nullptr);
+                worksheet_write_number(worksheetKeyWord, KeyWordRow, 2, entry.lexemeCode, nullptr);
+                //worksheet_write_number(worksheetKeyWord, row, 3, entry.lexemeTypeSize, nullptr);
+            }
+            else continue;
+            KeyWordRow += 1;
+        }
+        workbook_close(workbookC1);
+        cout << "Successfully wrote data to " + GlobalPaths::KeyWordsTableXLSX << endl;
+
+        ConstantTableV2_0 SeparatorsInit(GlobalPaths::SeparatorsTable, SeparatorsLogger);
+        SeparatorsLogger << "Separators Table Contents: " << endl;
+        vector<ConstantTableEntry> SeparatorsTable = SeparatorsInit.getTable();
+        int separate_index = 0;
+        for (const auto& entry : SeparatorsTable) {
+            separate_index += 1;
+            outputConstantTableEntry(separate_index, entry, SeparatorsLogger);
+        }
+
+        lxw_workbook* workbookC2 = workbook_new(cSeparatorsTableXLSX);
+        if (!workbookC2) {
+            cerr << "Error creating workbook with name " + GlobalPaths::SeparatorsTableXLSX << endl;
+            return 1;
+        }
+        lxw_worksheet* worksheetSeparator = workbook_add_worksheet(workbookC2, "Constant Details");
+        if (!worksheetSeparator) {
+            cerr << "Error creating worksheet!" << endl;
+            workbook_close(workbookC2);
+            lxw_workbook_free(workbookC2);
+            return 1;
+        }
+
+        worksheet_write_string(worksheetSeparator, 0, 0, "№", nullptr);
+        worksheet_write_string(worksheetSeparator, 0, 1, "Separator", nullptr);
+        //worksheet_write_string(worksheetSeparator, 0, 2, "Type", nullptr);
+        worksheet_write_string(worksheetSeparator, 0, 2, "Lexeme Code", nullptr);
+        //worksheet_write_string(worksheetSeparator, 0, 4, "Lexeme Type Size", nullptr);
+
+        int SeparateRow = 1;
+        int SeparateIndex = 0;
+        for (const auto& entry : SeparatorsTable) {
+            if (entry.lexemeCode == Separator) {
+                worksheet_write_number(worksheetSeparator, SeparateRow, 0, SeparateIndex++, nullptr); // Write the index
+                worksheet_write_string(worksheetSeparator, SeparateRow, 1, entry.symbol.c_str(), nullptr);
+                //string typeString = ConstantTableV2_0::lexemeTypeToString(entry.type);
+                //worksheet_write_string(worksheetSeparator, row, 2, typeString.c_str(), nullptr);
+                worksheet_write_number(worksheetSeparator, SeparateRow, 2, entry.lexemeCode, nullptr);
+                //worksheet_write_number(worksheetSeparator, row, 4, entry.lexemeTypeSize, nullptr);
+            }
+            else continue;
+            SeparateRow += 1;
+        }
+        workbook_close(workbookC2);
+        cout << "Successfully wrote data to " + GlobalPaths::SeparatorsTableXLSX << endl;
+
+        ///* TESTING FUNCTION *///
+        int indexVal = 5;
+        KeyWordsLogger << "Type index for search: ";
+        try {
+            optional<ConstantTableEntry> KeyWordEntry = KeyWordsInit.getElementAtIndex(indexVal);
+            if (KeyWordEntry.has_value()) {
+                KeyWordsLogger << "Finding element at index " + to_string(indexVal) << endl;
+                string symbol = KeyWordEntry->symbol;
+                LanguageElementType type = KeyWordEntry->type;
+                int lexemeCode = KeyWordEntry->lexemeCode;
+                int lexemeTypeSize = KeyWordEntry->lexemeTypeSize;
+                string typed = ConstantTableV2_0::lexemeTypeToString(type);
+                KeyWordsLogger << "Symbol: " << symbol << endl;
+                KeyWordsLogger << "Lexeme Type: " << typed << endl;
+                KeyWordsLogger << "Lexeme Code: " << lexemeCode << endl;
+                KeyWordsLogger << "Lexeme Type Size: " << lexemeTypeSize << endl;
+            }
+        } catch (const exception& e) {
+            KeyWordsLogger << "No element found at index " + to_string(indexVal) << endl;
+            throw out_of_range("No element found at index " + to_string(indexVal) +
+            " (finding the value out of range)");
+        }
+        KeyWordsLogger << "Contains 'void': " << KeyWordsInit.contains("void") << endl;
+        KeyWordsLogger << "Contains 'Unknown': " << KeyWordsInit.contains("Unknown") << endl;
+        SeparatorsLogger << "Contains '::': " << SeparatorsInit.contains("::") << endl;
+        int index = KeyWordsInit.getIndex("static_assert");
+        KeyWordsLogger << "Index of 'static_assert': " << index << endl;
+        int index1 = SeparatorsInit.getIndex("%");
+        SeparatorsLogger << "Index of '%': " << index1 << endl;
+        int lexemeCodo = SeparatorsInit.getLexemeCode(".*");
+        SeparatorsLogger << "Lexeme code of '.*': " << lexemeCodo << endl;
+        KeyWordsLogger.close();
+        SeparatorsLogger.close();

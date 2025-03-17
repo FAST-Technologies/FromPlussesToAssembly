@@ -1,0 +1,248 @@
+        auto IdentifiersLogger = ofstream(GlobalPaths::IdentifiersLogFile);
+        auto ConstantsLogger = ofstream(GlobalPaths::ConstantsLogFile);
+        if (!IdentifiersLogger.is_open()) {
+            cerr << "Can not open " + GlobalPaths::IdentifiersLogFile + " for writing logs!" << endl;
+            return 1;
+        }
+        if (!ConstantsLogger.is_open()) {
+            cerr << "Can not open " + GlobalPaths::ConstantsLogFile + " for writing logs!" << endl;
+            return 1;
+        }
+        VariableTableV2_0 VariableTableV2_01(10);
+        VariableTableV2_0 VariableTableV2_02(10);
+        SetColor(7,0);
+
+        VariableTableV2_01.addLexeme("myVariable", LexemeType::Int);
+        VariableTableV2_02.addLexeme("-7.1", LexemeType::Float);
+        VariableTableV2_01.addLexeme("Who", LexemeType::Undefined);
+        VariableTableV2_02.addLexeme("3.86745635", LexemeType::Double);
+        VariableTableV2_01.addLexeme("a", LexemeType::Char);
+        VariableTableV2_01.addLexeme("true", LexemeType::Bool);
+        VariableTableV2_01.addLexeme("ased", LexemeType::String);
+        VariableTableV2_02.addLexeme("2.65", LexemeType::Float);
+        VariableTableV2_02.addLexeme("2.87", LexemeType::Float);
+        VariableTableV2_02.addLexeme("2.88", LexemeType::Float);
+        VariableTableV2_02.addLexeme("2.89", LexemeType::Float);
+        VariableTableV2_02.addLexeme("2.86", LexemeType::Float);
+        VariableTableV2_02.addLexeme("2.85", LexemeType::Float);
+        VariableTableV2_02.addLexeme("7", LexemeType::Int);
+        VariableTableV2_02.addLexeme("2.84", LexemeType::Float);
+        VariableTableV2_02.addLexeme("2.83", LexemeType::Float);
+        VariableTableV2_02.addLexeme("2.82", LexemeType::Float);
+        VariableTableV2_02.addLexeme("2.81", LexemeType::Float);
+        VariableTableV2_02.addLexeme("2.80", LexemeType::Float);
+
+        IdentifiersLogger << "Contains 'myVariable': " << VariableTableV2_01.containsLexeme("myVariable") << endl;
+        ConstantsLogger << "Contains '7': " << VariableTableV2_02.containsLexeme("7") << endl;
+        IdentifiersLogger << "Contains 'Who': " << VariableTableV2_01.containsLexeme("Who") << endl;
+        ConstantsLogger << "Contains 'nonExistent': " << VariableTableV2_01.containsLexeme("nonExistent") << endl;
+
+        vector<string> IdentifiersNames = VariableTableV2_01.get_all_names();
+        vector<string> ConstantsNames = VariableTableV2_02.get_all_names();
+
+        IdentifiersLogger << "Changing types for identifiers: " << endl;
+        for (const string& name : IdentifiersNames) {
+            LexemeAttributes attributes;
+            if (VariableTableV2_01.getAttribute(name, attributes)) {
+                if (attributes.type == LexemeType::String) {
+                    int sized = static_cast<int>(sizeof(string) * name.size());
+                    VariableTableV2_01.set_size(name, sized);
+                    VariableTableV2_01.set_code(name, Identifier);
+                }
+            }
+        }
+
+        VariableTableV2_01.printTable(IdentifiersLogger);
+        VariableTableV2_02.printTable(ConstantsLogger);
+
+        if (VariableTableV2_01.set_type("Who", LexemeType::Double)) {
+            IdentifiersLogger << "Successfully changed 'Who' to Double." << endl;
+        } else {
+            IdentifiersLogger << "Failed to change 'Who' to Double (not found)." << endl;
+        }
+
+        if (VariableTableV2_01.set_init("ab", true)) {
+            IdentifiersLogger << "Successfully initialized 'ab'." << endl;
+        } else {
+            IdentifiersLogger << "Failed to initialize 'ab' (not found)." << endl;
+        }
+
+        VariableTableV2_01.printTable(IdentifiersLogger);
+
+        VariableTableV2_02.addLexeme("23", LexemeType::Bool);
+
+        VariableTableV2_02.printTable(ConstantsLogger);
+
+        LexemeAttributes myIntAttributes;
+        myIntAttributes.type = LexemeType::Int;
+        myIntAttributes.initialized = true;
+        myIntAttributes.lexemeCode = Constant;
+        myIntAttributes.lexemeTypeSize = sizeof(int);
+
+        if (VariableTableV2_02.addAttribute("23", myIntAttributes)) {
+            ConstantsLogger << "Successfully added attributes to '23'." << endl;
+        } else {
+            ConstantsLogger << "Failed to add attributes to '23' (not found)." << endl;
+        }
+        VariableTableV2_02.printTable(ConstantsLogger);
+
+        lxw_workbook* workbookV1 = workbook_new(cIdentifiersTableXLSX);
+        if (!workbookV1) {
+            cerr << "Error creating workbook with name " + GlobalPaths::IdentifiersTableXLSX << endl;
+            return 1;
+        }
+
+        lxw_worksheet* worksheetIdentifier = workbook_add_worksheet(workbookV1, "Identifiers Data");
+        if (!worksheetIdentifier) {
+            cerr << "Error creating worksheet!" << endl;
+            workbook_close(workbookV1);
+            lxw_workbook_free(workbookV1);
+            return 1;
+        }
+
+        int IdentifierIndex = 0;
+        worksheet_write_string(worksheetIdentifier, 0, 0, "№", nullptr);
+        worksheet_write_string(worksheetIdentifier, 0, 1, "Identifier", nullptr);
+        //worksheet_write_string(worksheetIdentifier, 0, 1, "Type", nullptr);
+        //worksheet_write_string(worksheetIdentifier, 0, 2, "Initialized", nullptr);
+        worksheet_write_string(worksheetIdentifier, 0, 2, "Lexeme Code", nullptr);
+        //worksheet_write_string(worksheetIdentifier, 0, 4, "Lexeme Type Size", nullptr);
+
+        lxw_workbook* workbookV2 = workbook_new(cConstantsTableXLSX);
+        if (!workbookV2) {
+            cerr << "Error creating workbook with name " + GlobalPaths::ConstantsTableXLSX << endl;
+            return 1;
+        }
+
+        lxw_worksheet* worksheetConstants = workbook_add_worksheet(workbookV2, "Constants Data");
+        if (!worksheetConstants) {
+            cerr << "Error creating worksheet!" << endl;
+            workbook_close(workbookV2);
+            lxw_workbook_free(workbookV2);
+            return 1;
+        }
+        int ConstantsIndex = 0;
+        worksheet_write_string(worksheetConstants, 0, 0, "№", nullptr);
+        worksheet_write_string(worksheetConstants, 0, 1, "Constant Value", nullptr);
+        //worksheet_write_string(worksheetConstants, 0, 1, "Type", nullptr);
+        //worksheet_write_string(worksheetConstants, 0, 2, "Initialized", nullptr);
+        worksheet_write_string(worksheetConstants, 0, 2, "Lexeme Code", nullptr);
+        //worksheet_write_string(worksheetConstants, 0, 4, "Lexeme Type Size", nullptr);
+
+        double val;
+        int IdentifiersRow = 1;
+        int ConstantsRow = 1;
+        for (const string& name : IdentifiersNames) {
+            LexemeAttributes attributes;
+            if (VariableTableV2_01.getAttribute(name, attributes)) {
+                if (attributes.lexemeCode == Identifier) {
+                    worksheet_write_number(worksheetIdentifier, IdentifiersRow, 0, IdentifierIndex++, nullptr);
+                    worksheet_write_string(worksheetIdentifier, IdentifiersRow, 1, name.c_str(), nullptr);
+                    string typeString;
+                    switch (attributes.type) {
+                        case LexemeType::Int: typeString = "Int"; break;
+                        case LexemeType::Float: typeString = "Float"; break;
+                        case LexemeType::String: typeString = "String"; break;
+                        case LexemeType::Bool: typeString = "Bool"; break;
+                        case LexemeType::Char: typeString = "Char"; break;
+                        case LexemeType::Double: typeString = "Double"; break;
+                        default: typeString = "Undefined"; break;
+                    }
+                    //worksheet_write_string(worksheetIdentifier, row, 1, typeString.c_str(), nullptr); // Type
+
+                    //worksheet_write_boolean(worksheetIdentifier, row, 2, attributes.initialized, nullptr); // Initialized
+                    worksheet_write_number(worksheetIdentifier, IdentifiersRow, 2, attributes.lexemeCode, nullptr);  // Lexeme Code
+                    //worksheet_write_number(worksheetIdentifier, row, 4, attributes.lexemeTypeSize, nullptr); // Lexeme Type Size
+                    IdentifiersRow++;
+                }
+                else if (attributes.lexemeCode == Constant) {
+                    cout << "Not correct type for: " << name.c_str() << " " << Constant << endl;
+                }
+            }
+        }
+        for (const string& name : ConstantsNames) {
+            LexemeAttributes attributes;
+            if (VariableTableV2_02.getAttribute(name, attributes)) {
+                if (attributes.lexemeCode == Constant) {
+                    worksheet_write_number(worksheetConstants, ConstantsRow, 0, ConstantsIndex++, nullptr);
+                    if (containsDot(name))
+                    {
+                        string NewString = name;
+                        replace(NewString.begin(), NewString.end(), '.', ',');
+                        val = stod(NewString);
+                        worksheet_write_number(worksheetConstants, ConstantsRow, 1, val, nullptr);
+                    }
+                    else {
+                        val = stod(name);
+                        worksheet_write_number(worksheetConstants, ConstantsRow, 1, val, nullptr);
+                    }
+                    string typeString;
+                    switch (attributes.type) {
+                        case LexemeType::Int: typeString = "Int"; break;
+                        case LexemeType::Float: typeString = "Float"; break;
+                        case LexemeType::String: typeString = "String"; break;
+                        case LexemeType::Bool: typeString = "Bool"; break;
+                        case LexemeType::Char: typeString = "Char"; break;
+                        case LexemeType::Double: typeString = "Double"; break;
+                        default: typeString = "Undefined"; break;
+                    }
+                    //worksheet_write_string(worksheetConstants, row, 1, typeString.c_str(), nullptr); // Type
+
+                    //worksheet_write_boolean(worksheetConstants, row, 2, attributes.initialized, nullptr); // Initialized
+                    worksheet_write_number(worksheetConstants, ConstantsRow, 2, attributes.lexemeCode, nullptr);  // Lexeme Code
+                    //worksheet_write_number(worksheetConstants, row, 4, attributes.lexemeTypeSize, nullptr); // Lexeme Type Size
+                    ConstantsRow++;
+                }
+                else if (attributes.lexemeCode == Identifier) {
+                    cout << "Not correct type for: " << name.c_str() << " " << Identifier << endl;
+                }
+            }
+        }
+
+        workbook_close(workbookV1);
+        cout << "Successfully wrote data to " + GlobalPaths::IdentifiersTableXLSX<< endl;
+        workbook_close(workbookV2);
+        cout << "Successfully wrote data to " + GlobalPaths::ConstantsTableXLSX << endl;
+
+        LexemeAttributes retrievedAttributes;
+        if (VariableTableV2_01.getAttribute("Who", retrievedAttributes)) {
+            IdentifiersLogger << "Successfully retrieved attributes for 'Who'." << endl;
+            IdentifiersLogger << "  Type: ";
+            switch (retrievedAttributes.type) {
+                case LexemeType::Int: IdentifiersLogger << "Int"; break;
+                case LexemeType::Float: IdentifiersLogger << "Float"; break;
+                case LexemeType::String: IdentifiersLogger << "String"; break;
+                default: IdentifiersLogger << "Unknown"; break;
+            }
+            IdentifiersLogger << endl;
+            IdentifiersLogger << "  Initialized: " << retrievedAttributes.initialized << endl;
+            IdentifiersLogger << "  Lexeme Code: " << retrievedAttributes.lexemeCode << endl;
+            IdentifiersLogger << "  Lexeme Type Size: " << retrievedAttributes.lexemeTypeSize << endl;
+
+            vector<string> names1 = VariableTableV2_01.get_all_names();
+
+            VariableTableV2_01.remove_lexeme("myVariable");
+            IdentifiersLogger << "myVariable was successfully removed" << endl;
+
+            VariableTableV2_01.printTable(IdentifiersLogger);
+
+        } else {
+            IdentifiersLogger << "Failed to retrieve attributes for 'Who' (not found)." << endl;
+        }
+
+        VariableTableV2_02.remove_lexeme_without_name(40, LexemeType::Float, false);
+
+        IdentifiersLogger << "All data was successfully removed" << endl;
+        VariableTableV2_02.printTable(ConstantsLogger);
+
+
+        LexemeAttributes nonExistingAttributes;
+        if (VariableTableV2_02.getAttribute("nonExistingVar", nonExistingAttributes)) {
+            ConstantsLogger << "Successfully retrieved attributes for 'nonExistingVar'." << endl;
+        } else {
+            ConstantsLogger << "Failed to retrieve attributes for 'nonExistingVar' (not found)." << endl;
+        }
+
+        VariableTableV2_02.printTable(ConstantsLogger);
+        IdentifiersLogger.close();
+        ConstantsLogger.close();
