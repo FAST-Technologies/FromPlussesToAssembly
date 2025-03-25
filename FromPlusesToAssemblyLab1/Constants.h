@@ -46,13 +46,15 @@ namespace GlobalPaths {
     const string SeparatorsLogFile = logFilesDir + "SeparatorsOutput.log";
     const string IdentifiersLogFile = logFilesDir + "IdentifiersOutput.log";
     const string ConstantsLogFile = logFilesDir + "ConstantsOutput.log";
+    const string OutputsLogFile = logFilesDir + "Output.log";
 
     const string TokenFile = outputDir + "tokens.txt";
+    const string ErrorFile = outputDir + "errorOutput.txt";
 }
 
 /// <summary>
-/// [EN] Constants
-/// [RU] Константы
+/// [EN] Constants (Token type)
+/// [RU] Константы (тип токена)
 /// </summary>
 typedef enum Constants {
     KeyWord = 10,
@@ -61,6 +63,10 @@ typedef enum Constants {
     Constant = 40
 } Constants;
 
+/// <summary>
+/// [EN] Token structure
+/// [RU] Структура токена
+/// </summary>
 struct Token {
     int type;
     int tableIndex;

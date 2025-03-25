@@ -20,6 +20,7 @@
 using namespace std;
 
 int sad(int& num, const string& name) {
+    int klass = 0;
     cout << num << name << endl;
     return num;
 }
@@ -27,6 +28,7 @@ int sad(int& num, const string& name) {
 const double ar = 1.23455;
 
 int main() {
+    cout << "Program started" << endl;
     int age = 30;
     int& myIntRef = age;
     float height = 1.75;

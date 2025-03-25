@@ -44,6 +44,46 @@ int VariableTableV2_0::lexemeSize(const string& typeStr, const string& symbol)
         lexemeTypeSize = sizeof(char);
     } else if (typeStr == "String") {
         lexemeTypeSize = static_cast<int>(sizeof(string) * symbol.size());
+    } else if (typeStr == "Wstring") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Vector") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Array") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "List") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Unordered_map") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Forward_list") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Deque") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Queue") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Priority_queue") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Stack") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Map") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Set") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Unordered_set") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Multimap") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Multiset") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Bitset") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Pair") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Tuple") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Optional") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
+    } else if (typeStr == "Variant") {
+        lexemeTypeSize = static_cast<int>(sizeof(wstring) * symbol.size());
     }
     return lexemeTypeSize;
 }
@@ -209,6 +249,10 @@ bool VariableTableV2_0::addLexeme(const string& name, LexemeType type)
             lexemeCode = Constants::Identifier;
             lexemeTypeSize = static_cast<int>(sizeof(string) * name.size());
             break;
+        case LexemeType::WString:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = static_cast<int>(sizeof(wstring) * name.size());
+            break;
         case LexemeType::Bool:
             lexemeCode = Constants::Constant;
             lexemeTypeSize = sizeof(bool);
@@ -218,6 +262,82 @@ bool VariableTableV2_0::addLexeme(const string& name, LexemeType type)
             lexemeTypeSize = sizeof(double);
             break;
         case LexemeType::Char:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Vector:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Array:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::List:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Unordered_map:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Forward_list:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Deque:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Queue:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Priority_queue:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Stack:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Map:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Set:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Unordered_set:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Multimap:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Multiset:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Bitset:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Pair:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Tuple:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Optional:
+            lexemeCode = Constants::Identifier;
+            lexemeTypeSize = sizeof(double);
+            break;
+        case LexemeType::Variant:
             lexemeCode = Constants::Identifier;
             lexemeTypeSize = sizeof(double);
             break;
@@ -259,6 +379,27 @@ string VariableTableV2_0::lexemeTypeToString(LexemeType type)
         case LexemeType::Double: return "Double";
         case LexemeType::Bool: return "Bool";
         case LexemeType::Char: return "Char";
+        case LexemeType::WString: return "WString";
+        case LexemeType::Vector: return "Vector";
+        case LexemeType::Array: return "Array";
+        case LexemeType::List: return "List";
+        case LexemeType::Unordered_map: return "Unordered_map";
+        case LexemeType::Forward_list: return "Forward_list";
+        case LexemeType::Deque: return "Deque";
+        case LexemeType::Queue: return "Queue";
+        case LexemeType::Priority_queue: return "Priority_queue";
+        case LexemeType::Stack: return "Stack";
+        case LexemeType::Map: return "Map";
+        case LexemeType::Set: return "Set";
+        case LexemeType::Unordered_set: return "Unordered_set";
+        case LexemeType::Multimap: return "Multimap";
+        case LexemeType::Multiset: return "Multiset";
+        case LexemeType::Bitset: return "Bitset";
+        case LexemeType::Pair: return "Pair";
+        case LexemeType::Tuple: return "Tuple";
+        case LexemeType::Optional: return "Optional";
+        case LexemeType::Variant: return "Variant";
+        case LexemeType::Function: return "Function";
         default: return "Unknown";
     }
 }
@@ -446,6 +587,10 @@ bool VariableTableV2_0::set_code(const string& name, int lexemeCode)
 /// </summary
 LexemeType VariableTableV2_0::determineLexemeType(const string& value)
 {
+    if (!isdigit(value[0]) && !(value[0] == '-' && value.size() > 1 && isdigit(value[1])) && value.length() != 1) {
+        return LexemeType::Undefined; // Идентификаторы не должны определяться здесь
+    }
+
     stringstream ss(value);
     int intValue;
     float floatValue;
@@ -461,10 +606,8 @@ LexemeType VariableTableV2_0::determineLexemeType(const string& value)
     // Check for int
     ss.clear();
     ss.str(value);
-    if (ss >> intValue) {
-        if (ss.eof()) {
-            return LexemeType::Int;
-        }
+    if (ss >> intValue && ss.eof()) {
+        return LexemeType::Int;
     }
 
     // Check for char next (single character)
@@ -486,20 +629,22 @@ LexemeType VariableTableV2_0::determineLexemeType(const string& value)
                 size_t digitsAfterDecimal = value.length() - decimalPos - 1;
                 if (digitsAfterDecimal > 7) {
                     return LexemeType::Double;
+                } else {
+                    return LexemeType::Float;
                 }
             }
         }
     }
 
-    ss.clear();
-    ss.str(value);
-    if (ss >> floatValue) {
-        if (ss.eof()) {
-            return LexemeType::Float;
-        }
-    }
+//    ss.clear();
+//    ss.str(value);
+//    if (ss >> floatValue) {
+//        if (ss.eof()) {
+//            return LexemeType::Float;
+//        }
+//    }
 
-    return LexemeType::String;
+    return LexemeType::Undefined;
 }
 
 /// <summary>
@@ -521,6 +666,26 @@ void VariableTableV2_0::printTable(ofstream& logger) const {
                 case LexemeType::Bool: logger << "Bool"; break;
                 case LexemeType::Double: logger << "Double"; break;
                 case LexemeType::Char: logger << "Char"; break;
+                case LexemeType::WString: logger << "WString"; break;
+                case LexemeType::Vector: logger << "Vector"; break;
+                case LexemeType::Array: logger << "Array"; break;
+                case LexemeType::List: logger << "List"; break;
+                case LexemeType::Unordered_map: logger << "Unordered_map"; break;
+                case LexemeType::Forward_list: logger << "Forward_list"; break;
+                case LexemeType::Deque: logger << "Deque"; break;
+                case LexemeType::Queue: logger << "Queue"; break;
+                case LexemeType::Priority_queue: logger << "Priority_queue"; break;
+                case LexemeType::Stack: logger << "Stack"; break;
+                case LexemeType::Map: logger << "Map"; break;
+                case LexemeType::Set: logger << "Set"; break;
+                case LexemeType::Unordered_set: logger << "Unordered_set"; break;
+                case LexemeType::Multimap: logger << "Multimap"; break;
+                case LexemeType::Multiset: logger << "Multiset"; break;
+                case LexemeType::Bitset: logger << "Bitset"; break;
+                case LexemeType::Pair: logger << "Pair"; break;
+                case LexemeType::Tuple: logger << "Tuple"; break;
+                case LexemeType::Optional: logger << "Optional"; break;
+                case LexemeType::Variant: logger << "Variant"; break;
                 case LexemeType::Undefined: logger << "Undefined"; break;
                 default: logger << "Unknown"; break;
             }

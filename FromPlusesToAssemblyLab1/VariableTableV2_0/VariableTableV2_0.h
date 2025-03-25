@@ -38,7 +38,28 @@ enum class LexemeType {
     Double,
     String,
     Char,
-    Bool
+    Bool,
+    WString,
+    Vector,
+    Array,
+    List,
+    Unordered_map,
+    Forward_list,
+    Deque,
+    Queue,
+    Priority_queue,
+    Stack,
+    Map,
+    Set,
+    Unordered_set,
+    Multimap,
+    Multiset,
+    Bitset,
+    Pair,
+    Tuple,
+    Optional,
+    Variant,
+    Function
 };
 
 /// <summary>
@@ -188,6 +209,12 @@ public:
 /// </summary
 [[nodiscard]] size_t hash(const string& key) const;
 
+/// <summary>
+/// [EN] Helper function to determine LexemeType
+/// [RU] Вспомогательная функция для вычленения LexemeType
+/// </summary
+[[nodiscard]] static LexemeType determineLexemeType(const string& value) ;
+
 private:
     /// <summary>
     /// [EN] Hash table structure: variable name and attributes
@@ -224,12 +251,6 @@ private:
     /// [RU] Функция рехеширования
     /// </summary
     void rehash();
-
-    /// <summary>
-    /// [EN] Helper function to determine LexemeType
-    /// [RU] Вспомогательная функция для вычленения LexemeType
-    /// </summary
-    [[nodiscard]] static LexemeType determineLexemeType(const string& value) ;
 
     /// <summary>
     /// [EN] Function for adding the explicit lexeme to hash table

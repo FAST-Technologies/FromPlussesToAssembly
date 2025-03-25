@@ -1,14 +1,7 @@
-"C:\Program Files\JetBrains\CLion 2024.2.3\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2024.2.3/bin/ninja/win/x64/ninja.exe" -DCMAKE_PREFIX_PATH=C:/msys64/mingw64 -DCMAKE_PREFIX_PATH=C:/msys64 -G Ninja -S C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1 -B C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\cmake-build-debug
-CMAKE_CXX_FLAGS: 
+"C:\Program Files\JetBrains\CLion 2024.2.3\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles" -S C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1 -B C:\Users\Vladimir\FromPlussesToAssembly\FromPlusesToAssemblyLab1\cmake-build-debug
 CMAKE_CXX_FLAGS: 
 CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES: C:/Program Files/JetBrains/CLion 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++;C:/Program Files/JetBrains/CLion 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32;C:/Program Files/JetBrains/CLion 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward;C:/Program Files/JetBrains/CLion 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include;C:/Program Files/JetBrains/CLion 2024.2.3/bin/mingw/include;C:/Program Files/JetBrains/CLion 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed;C:/Program Files/JetBrains/CLion 2024.2.3/bin/mingw/x86_64-w64-mingw32/include
 CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES: 
--- Configuring done (0.2s)
--- Generating done (0.0s)
-CMake Warning:
-  Manually-specified variables were not used by the project:
-
-    CMAKE_PREFIX_PATH
-
-
+-- Configuring done (0.3s)
+-- Generating done (0.1s)
 -- Build files have been written to: C:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/cmake-build-debug

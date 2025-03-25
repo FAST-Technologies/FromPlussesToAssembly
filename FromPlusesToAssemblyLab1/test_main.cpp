@@ -12,8 +12,9 @@
 /// Library for work with xlsx files under C++
 #include <xlsxwriter.h>
 
-int main()
+int main(int argc, char* argv[])
 {
+    cout << "Yes";
     setlocale(LC_ALL, "");
     cout.flags(ios::fixed);
     cout.setf(ios_base::fixed);
@@ -151,13 +152,13 @@ int main()
         SeparatorsLogger << "Lexeme code of '.*': " << lexemeCodo << endl;
         KeyWordsLogger.close();
         SeparatorsLogger.close();
-    } catch (const exception& e) {
-        SetColor(14,0);
-        cerr << "Exception during Constant Table testing: " << e.what() << endl;
-        throw e;
-    }
-
-    try {
+//    } catch (const exception& e) {
+//        SetColor(14,0);
+//        cerr << "Exception during Constant Table testing: " << e.what() << endl;
+//        throw e;
+//    }
+//
+//    try {
         auto IdentifiersLogger = ofstream(GlobalPaths::IdentifiersLogFile);
         auto ConstantsLogger = ofstream(GlobalPaths::ConstantsLogFile);
         if (!IdentifiersLogger.is_open()) {
@@ -320,6 +321,7 @@ int main()
                 }
                 else if (attributes.lexemeCode == Constant) {
                     cout << "Not correct type for: " << name.c_str() << " " << Constant << endl;
+                    IdentifiersInit.remove_lexeme(name);
                 }
             }
         }
@@ -344,6 +346,7 @@ int main()
                 }
                 else if (attributes.lexemeCode == Identifier) {
                     cout << "Not correct type for: " << name.c_str() << " " << Identifier << endl;
+                    ConstantsInit.remove_lexeme(name);
                 }
             }
         }
@@ -370,18 +373,36 @@ int main()
         ConstantsInit.printTable(ConstantsLogger);
         IdentifiersLogger.close();
         ConstantsLogger.close();
+        cout << "Before death" << endl;
+        Scanner scanner(KeyWordsInit, SeparatorsInit, IdentifiersInit, ConstantsInit);
+        string filename = "test.cpp";
+//        if (argc != 2) {
+//            cerr << "Usage: program_name <cpp_file.cpp>" << endl;
+//            return 1;
+//        }
+//        string filename = argv[1];
+        ifstream inputFile(filename);
+        if (!inputFile.is_open()) {
+            cerr << "Error opening file: " << filename << endl;
+            return 1;
+        }
+        stringstream buffer;
+        buffer << inputFile.rdbuf();
+        string code = buffer.str();
+        inputFile.close();
+        cout << code << endl;
+        cout << "Processing code: " << code << endl << endl;
+        const string errorLog = GlobalPaths::ErrorFile;
+        scanner.processCode(code, errorLog);
+        auto OutputsLogger = ofstream(GlobalPaths::OutputsLogFile);
+        OutputsLogger << "\nTable contents after processing:" << endl;
+        scanner.printTableContents(OutputsLogger);
+        OutputsLogger.close();
     } catch (const exception& e) {
         SetColor(14,0);
         cerr << "Exception during Variable Table testing: " << e.what() << endl;
         throw e;
     }
-
-//    /// Trying to make working scanner
-//    Scanner scanner(KeyWordsInit, SeparatorsInit, IdentifiersInit, ConstantsInit);
 //    string code = "int foo(int x) = x + 5; bool flag = true ^ false; return foo;";
-//    cout << "Processing code: " << code << endl << endl;
-//    scanner.processCode(code);
-//    cout << "\nTable contents after processing:" << endl;
-//    scanner.printTableContents(IdentifiersLogger);
     return 0;
 }

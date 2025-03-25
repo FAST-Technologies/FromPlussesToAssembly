@@ -1,0 +1,307 @@
+
+Table contents after processing:
+Keywords:
+#include 
+alignas 
+alignof 
+and 
+and_eq 
+array 
+asm 
+auto 
+bitand 
+bitor 
+bitset 
+bool 
+break 
+case 
+catch 
+char 
+char16_t 
+char32_t 
+char8_t 
+class 
+co_await 
+co_return 
+co_yield 
+compl 
+concept 
+const 
+const_cast 
+consteval 
+constexpr 
+constinit 
+continue 
+cout 
+decltype 
+default 
+delete 
+deque 
+do 
+double 
+dynamic_cast 
+else 
+endl 
+enum 
+explicit 
+export 
+extern 
+false 
+float 
+for 
+forward_list 
+friend 
+goto 
+if 
+include 
+inline 
+int 
+iostream 
+list 
+long 
+main 
+map 
+multimap 
+multiset 
+mutable 
+namespace 
+new 
+noexcept 
+not 
+not_eq 
+nullptr 
+operator 
+optional 
+or 
+or_eq 
+pair 
+priority_queue 
+private 
+protected 
+public 
+queue 
+reflexpr 
+register 
+reinterpret_cast 
+requires 
+return 
+set 
+short 
+signed 
+sizeof 
+stack 
+static 
+static_assert 
+static_cast 
+std 
+string 
+struct 
+switch 
+synchronized 
+template 
+this 
+thread_local 
+throw 
+true 
+try 
+tuple 
+typedef 
+typeid 
+typename 
+union 
+unordered_map 
+unordered_set 
+unsigned 
+using 
+variant 
+vector 
+virtual 
+void 
+volatile 
+wchar_t 
+while 
+wstring 
+xor 
+xor_eq 
+
+Delimiters:
+! 
+!= 
+" 
+# 
+% 
+%= 
+& 
+&& 
+&= 
+' 
+( 
+) 
+* 
+*= 
++ 
+++ 
++= 
+, 
+- 
+-- 
+-= 
+->* 
+. 
+.* 
+... 
+/ 
+/= 
+: 
+:: 
+; 
+< 
+<< 
+<<= 
+<= 
+= 
+== 
+> 
+>= 
+>> 
+>>= 
+[ 
+] 
+^ 
+^= 
+{ 
+| 
+|= 
+|| 
+} 
+~ 
+
+Identifiers:
+st (WString, initialized: Yes) 
+ter (WString, initialized: Yes) 
+num (Int, initialized: No) 
+yes (Double, initialized: Yes) 
+myPair (Pair, initialized: Yes) 
+myVariantString (Variant, initialized: Yes) 
+myMap (Unordered_map, initialized: Yes) 
+test (String, initialized: Yes) 
+myDeque (Deque, initialized: Yes) 
+myConstList (List, initialized: Yes) 
+sad (Int, initialized: No) 
+myForwardList (Forward_list, initialized: Yes) 
+myStack2 (Stack, initialized: No) 
+myTuple2 (Tuple, initialized: Yes) 
+myDeque1 (Deque, initialized: Yes) 
+age (Int, initialized: Yes) 
+initial (Char, initialized: Yes) 
+myQueue (Queue, initialized: No) 
+myOptional2 (Optional, initialized: Yes) 
+myList (List, initialized: Yes) 
+myVector (Vector, initialized: Yes) 
+myPriorityQueue2 (Priority_queue, initialized: No) 
+myBitset2 (Bitset, initialized: Yes) 
+myVariantInt (Variant, initialized: Yes) 
+pi (Double, initialized: Yes) 
+push (Function, initialized: Yes) 
+mySet2 (Set, initialized: Yes) 
+myVariantInt2 (Variant, initialized: Yes) 
+Who (Double, initialized: No) 
+myConstListRef (List, initialized: Yes) 
+myMap1 (Unordered_map, initialized: Yes) 
+myVector1 (Vector, initialized: Yes) 
+myMap3 (Map, initialized: Yes) 
+myMap4 (Map, initialized: Yes) 
+myEmptyOptional (Optional, initialized: No) 
+is_student (Bool, initialized: Yes) 
+myList1 (List, initialized: Yes) 
+myList2 (List, initialized: Yes) 
+myPair2 (Pair, initialized: Yes) 
+myQueue2 (Queue, initialized: No) 
+ar (Double, initialized: Yes) 
+myMultiset (Multiset, initialized: Yes) 
+myStack (Stack, initialized: No) 
+myTuple (Tuple, initialized: Yes) 
+a (Char, initialized: No) 
+myPriorityQueue (Priority_queue, initialized: No) 
+be (Float, initialized: Yes) 
+myArray1 (Array, initialized: Yes) 
+height (Float, initialized: Yes) 
+myVariantString2 (Variant, initialized: Yes) 
+myVariantString3 (Variant, initialized: Yes) 
+j (Int, initialized: Yes) 
+name (String, initialized: Yes) 
+myOptional (Optional, initialized: Yes) 
+err3 (Double, initialized: Yes) 
+myMultimap (Multimap, initialized: Yes) 
+ased (Undefined, initialized: No) 
+myUnorderedSet2 (Unordered_set, initialized: Yes) 
+main (Int, initialized: No) 
+myUnorderedSet (Unordered_set, initialized: Yes) 
+myMultiset2 (Multiset, initialized: Yes) 
+myBitset (Bitset, initialized: Yes) 
+freak (Bool, initialized: Yes) 
+myMultimap2 (Multimap, initialized: Yes) 
+myListRef (List, initialized: Yes) 
+myArray (Array, initialized: Yes) 
+myIntRef (Int, initialized: Yes) 
+myEmptyOptional2 (Optional, initialized: No) 
+mySet (Set, initialized: Yes) 
+you (Int, initialized: Yes) 
+
+Constants:
+22 (Int) 
+23 (Int) 
+24 (Int) 
+1.0 (Float) 
+2.0 (Float) 
+3.0 (Float) 
+2.2 (Float) 
+29 (Int) 
+3.14159 (Float) 
+4.0 (Float) 
+5.0 (Float) 
+1.1 (Float) 
+3.3 (Float) 
+4.4 (Float) 
+10000000 (Int) 
+2.80 (Float) 
+2.81 (Float) 
+2.82 (Float) 
+2.83 (Float) 
+2.84 (Float) 
+2.85 (Float) 
+2.86 (Float) 
+3.86745635 (Double) 
+2.87 (Float) 
+2.88 (Float) 
+2.89 (Float) 
+30 (Int) 
+2.65 (Float) 
+1.75 (Float) 
+-7.1 (Float) 
+1.23 (Float) 
+10 (Int) 
+11 (Int) 
+1 (Int) 
+2 (Int) 
+3 (Int) 
+4 (Int) 
+5 (Int) 
+1.23455 (Float) 
+7 (Int) 
+6 (Int) 
+9 (Int) 
+12 (Int) 
+13 (Int) 
+14 (Int) 
+15 (Int) 
+16 (Int) 
+17 (Int) 
+18 (Int) 
+19 (Int) 
+8 (Int) 
+128 (Int) 
+0 (Int) 
+20 (Int) 
+21 (Int) 
+

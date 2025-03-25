@@ -1,0 +1,6 @@
+Error: Error: not correct second variable name for to current type
+Illegal token: 1asd
+Error: Error: not correct second variable name for to current type
+Illegal token: 2a23
+Error: Unclosed bracket '{' at the end of code
+Illegal token: {

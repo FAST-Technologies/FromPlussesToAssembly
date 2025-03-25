@@ -2,33 +2,38 @@ cmake_minimum_required(VERSION 3.29)
 project(FromPlusesToAssemblyLab1)
 
 set(CMAKE_CXX_STANDARD 20)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -IC:/msys64/mingw64/include")
 
-# Find libxlsxwriter (CMake should be able to locate it automatically)
-# Include directories
-include_directories("C:/msys64/mingw64/include")
+# Указываем, что используем MinGW
+if (NOT MINGW)
+    message(FATAL_ERROR "This project requires MinGW. Please use a MinGW toolchain.")
+endif()
 
-# Link directories
-link_directories("C:/msys64/mingw64/lib")
+# Найти libxlsxwriter
+find_library(XLSXWRITER_LIBRARY NAMES xlsxwriter libxlsxwriter HINTS "C:/msys64/mingw64/lib")
+find_path(XLSXWRITER_INCLUDE_DIR xlsxwriter.h HINTS "C:/msys64/mingw64/include")
 
-message("CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
+if (NOT XLSXWRITER_LIBRARY OR NOT XLSXWRITER_INCLUDE_DIR)
+    message(FATAL_ERROR "libxlsxwriter not found. Please install it using 'pacman -S mingw-w64-x86_64-libxlsxwriter' in MSYS2.")
+endif()
+
+include_directories(${XLSXWRITER_INCLUDE_DIR})
+link_directories(${XLSXWRITER_LIBRARY})
 
 message("CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 message("CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES: ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES}")
 message("CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES: ${CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES}")
 
-#message(STATUS "PATH: ${env.PATH}")
-#message(STATUS "MSYSTEM: ${env.MSYSTEM}")
-
-add_executable(FromPlusesToAssemblyLab1 test_main.cpp
+add_executable(FromPlusesToAssemblyLab1
+        test_main.cpp
         VariableTableV2_0/VariableTableV2_0.cpp
         ConstantTableV2_0/ConstantTableV2_0.cpp
         Constants.h
-        test_main.cpp
         OutputModuleV2_0/OutputModuleV2_0.cpp
-        Scanner/Scanner.cpp)
+        Scanner/Scanner.cpp
+        Scanner/Scanner.cpp
+)
 
-target_link_libraries(FromPlusesToAssemblyLab1 xlsxwriter)
+target_link_libraries(FromPlusesToAssemblyLab1 ${XLSXWRITER_LIBRARY})
 
 ## Link against the library
 #if(libxlsxwriter_FOUND)

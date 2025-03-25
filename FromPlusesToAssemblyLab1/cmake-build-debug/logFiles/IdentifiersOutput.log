@@ -1,5 +1,5 @@
   Ahoo: Successfully retrieved attributes for 'Who'.
-  Type: String
+  Type: Undefined
   Initialized: 0
   Lexeme Code: 30
   Lexeme Type Size: 1
@@ -8,7 +8,7 @@ Variable Table Contents:
 Index: 2
   Name: Who
   Lexeme Code: 30
-  Type: String
+  Type: Undefined
 Lexeme type size: 1
   Initialized: No
 ----------------------
@@ -19,14 +19,14 @@ Variable Table Contents:
 Index: 2
   Name: Who
   Lexeme Code: 30
-  Type: String
-Lexeme type size: 96
+  Type: Undefined
+Lexeme type size: 1
   Initialized: No
 ----------------------
 Index: 3
   Name: ased
   Lexeme Code: 30
-  Type: String
+  Type: Undefined
 Lexeme type size: 128
   Initialized: No
 ----------------------
@@ -39,9 +39,9 @@ Lexeme type size: 8
 ----------------------
 Index: 8
   Name: true
-  Lexeme Code: 30
-  Type: String
-Lexeme type size: 128
+  Lexeme Code: 40
+  Type: Undefined
+Lexeme type size: 1
   Initialized: No
 ----------------------
 Successfully changed 'Who' to Double.
@@ -51,13 +51,13 @@ Index: 2
   Name: Who
   Lexeme Code: 30
   Type: Double
-Lexeme type size: 96
+Lexeme type size: 1
   Initialized: No
 ----------------------
 Index: 3
   Name: ased
   Lexeme Code: 30
-  Type: String
+  Type: Undefined
 Lexeme type size: 128
   Initialized: No
 ----------------------
@@ -70,8 +70,8 @@ Lexeme type size: 8
 ----------------------
 Index: 8
   Name: true
-  Lexeme Code: 30
-  Type: String
-Lexeme type size: 128
+  Lexeme Code: 40
+  Type: Undefined
+Lexeme type size: 1
   Initialized: No
 ----------------------
