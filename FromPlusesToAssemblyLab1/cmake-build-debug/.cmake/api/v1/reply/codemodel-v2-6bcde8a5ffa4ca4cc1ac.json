@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1/cmake-build-debug",
-		"source" : "C:/Users/Vladimir/FromPlussesToAssembly/FromPlusesToAssemblyLab1"
+		"build" : "E:/filedAssemb/FromPlussesToAssembly/FromPlusesToAssemblyLab1/cmake-build-debug",
+		"source" : "E:/filedAssemb/FromPlussesToAssembly/FromPlusesToAssemblyLab1"
 	},
 	"version" : 
 	{
